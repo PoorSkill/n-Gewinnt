@@ -16,6 +16,12 @@ public class Stone {
 	Stone() {
 	}
 
+	Stone(int xPos, int yPos, Color color) {
+		this.xPos = xPos;
+		this.yPos = yPos;
+		this.color = color;
+	}
+
 	/**
 	 * getter von xPos
 	 * 

@@ -10,16 +10,18 @@ import java.util.Map;
  *
  */
 public enum Color {
-	RED("red"), BLUE("blue");
+	RED(Strings.COLOR_RED_NAME.content, true), BLUE(Strings.COLOR_RED_NAME.content, true);
 	String name;
+	boolean free;
 
 	/**
 	 * Konstruktor
 	 * 
 	 * @param name
 	 */
-	Color(String name) {
+	Color(String name, boolean availability) {
 		this.name = name;
+		this.free = availability;
 	}
 
 	/**

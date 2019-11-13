@@ -1,5 +1,7 @@
 package viergewinnt;
 
+import java.util.Scanner;
+
 /**
  * Spieler
  * 
@@ -8,13 +10,38 @@ package viergewinnt;
  */
 public class Player {
 	String name;
+	Gamefield ownGamefield, opponentsGamefield;
 	Color color;
 	boolean correctPlay, won, bot;
 
 	/**
-	 * Standart Konstruktor
+	 * Standart Konstruktor -> Bot
 	 */
 	Player() {
+		Bot bot = new Bot();
+		this.name = Strings.BOT_NAME.content;
+		this.color = bot.checkFreeColor();
+		this.ownGamefield = new Gamefield(true);
+		this.opponentsGamefield = new Gamefield(false);
+		this.correctPlay = true;
+		this.won = false;
+		this.bot = false;
+	}
+
+	/**
+	 * Konstruktor bei manuellen Spielern
+	 * 
+	 * @param name
+	 * @param color
+	 */
+	Player(String name, Color color) {
+		this.name = name;
+		this.color = color;
+		this.ownGamefield = new Gamefield(true);
+		this.opponentsGamefield = new Gamefield(false);
+		this.correctPlay = true;
+		this.won = false;
+		this.bot = false;
 	}
 
 	/**
@@ -110,5 +137,15 @@ public class Player {
 	@SuppressWarnings("unused")
 	private void setBot(boolean newBot) {
 		this.bot = newBot;
+	}
+
+	/**
+	 * Setzen des Steines
+	 * 
+	 * @param sc
+	 * @param player2
+	 */
+	void setStone(Scanner sc, Player player2) {
+		// TODO: yap
 	}
 }

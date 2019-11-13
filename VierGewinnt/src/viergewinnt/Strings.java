@@ -10,7 +10,8 @@ import java.util.Map;
  *
  */
 public enum Strings {
-	RULES("Spielregeln:"), SETUP_PLAYER_NAME("Bitte Name eingeben: \n");
+	RULES("Spielregeln:"), SETUP_PLAYER_NAME("Bitte Name eingeben: \n"), BOT_NAME("Bot"), COLOR_RED_NAME("red"),
+	COLOR_BLUE_NAME("blue"), RUN_CHECK_QUESTION("\"Soll das Programm wiederholt werden? (y/n)");
 	String content;
 
 	/**
