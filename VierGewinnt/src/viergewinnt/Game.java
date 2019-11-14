@@ -19,12 +19,12 @@ public class Game {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Game game = new Game();
-		while (game.runCheck(sc)) {
+		do {
 			game.query(sc);
-		}
+		} while (game.runCheck(sc));
 		sc.close();
 		/*
-		 * redundant, aber moegliche Erweiterung System.exit(0);
+		 * redundant, aber moegliche Erweiterung: System.exit(0);
 		 */
 	}
 
@@ -35,20 +35,14 @@ public class Game {
 	 * @return true, falls es weiterlaufen soll
 	 */
 	public boolean runCheck(Scanner sc) {
-		String[] possibleAnswersOfYes = { "1", "yes", "true", "ja", "weiter", "ye", "ya" };
+		String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" };
 		System.out.println(Strings.RUN_CHECK_QUESTION.content);
 		String input = sc.nextLine().toLowerCase();
 		for (int i = 0; i <= possibleAnswersOfYes.length - 1; i++) {
 			if (input.equals(possibleAnswersOfYes[i])) {
 				return true;
 			}
-
 		}
-		// Switch durch for-Schleife ersetzt
-		/*
-		 * switch (input) { case "yes": case "true": case "ja": case "weiter": case "1":
-		 * return true; default:
-		 */
 		return false;
 	}
 
@@ -59,6 +53,11 @@ public class Game {
 	 */
 	void query(Scanner sc) {
 		// TODO: eine schoene Uebung zu Scanner und Kontruktoren
+
+		// test
+		Gamefield gamefieldTest = new Gamefield(true);
+		Player testPlayer = new Player();
+		testPlayer.printOwnField();
 	}
 
 	/**
@@ -94,6 +93,15 @@ public class Game {
 	 */
 	public static void emptyLines(int count) {
 		// TODO: 2min Aufgabe Kontrollstruktur
+		for (int i = 0; i <= count; ++i) {
+			System.out.println(" ");
+		}
+	}
+
+	public static void spacer(int amount) {
+		for (int i = 0; i <= amount; ++i) {
+			System.out.print(" ");
+		}
 	}
 
 }

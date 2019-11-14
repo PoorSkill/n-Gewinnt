@@ -13,6 +13,11 @@ public class Player {
 	Gamefield ownGamefield, opponentsGamefield;
 	Color color;
 	boolean correctPlay, won, bot;
+	String[] xCordsIdentifiers = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" }; // Generalisieren,
+																											// kann bei
+																											// höheren
+																											// sizeGamefield
+																											// helfen
 
 	/**
 	 * Standart Konstruktor -> Bot
@@ -148,4 +153,29 @@ public class Player {
 	void setStone(Scanner sc, Player player2) {
 		// TODO: yap
 	}
+
+	/**
+	 * Printed das eigene Feld in der Konsole (Grundrisse und field)
+	 * 
+	 */
+	public void printOwnField() {
+		// TODO: einfach erst Komplette Feld und dann Steine darueber malen
+		int spacer = Gamefield.defaultSpacer; // TODO: enum? oder generalisieren
+		System.out.println(Strings.PLAYER_NAME_INTRO.content + this.name + ":");
+		Game.emptyLines(Gamefield.defaultEmptyLines * 3);
+		for (int l = 0; l <= Gamefield.fieldMax - 1; ++l) {
+			System.out.print(this.xCordsIdentifiers[l]);
+			Game.spacer(spacer);
+		}
+		Game.emptyLines(Gamefield.defaultEmptyLines * 3);
+		for (int i = 0; i < Gamefield.fieldMax; ++i) {
+			for (int j = 0; j < Gamefield.fieldMax; ++j) {
+				System.out.print(this.ownGamefield.field[j][i]);
+				Game.spacer(spacer);
+			}
+			Game.emptyLines(Gamefield.defaultEmptyLines);
+		}
+		Game.emptyLines(Gamefield.defaultEmptyLines);
+	}
+
 }

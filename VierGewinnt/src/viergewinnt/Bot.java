@@ -8,6 +8,7 @@ package viergewinnt;
  */
 public class Bot {
 	boolean active;
+	Player player;
 
 	/**
 	 * Standart Konstruktor
@@ -49,5 +50,9 @@ public class Bot {
 	@SuppressWarnings("unused")
 	private void setActive(boolean newActive) {
 		this.active = newActive;
+	}
+
+	int randomXPos() {
+		return (int) (Math.random() * 10);
 	}
 }

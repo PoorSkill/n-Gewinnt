@@ -1,2 +1,4 @@
 # VierGewinnt
 VierGewinnt Java Spiel um die Langeweile in GBI zu bekämpfen
+
+Random Lerngruppe: Anton, Florian, Jan und Merlin

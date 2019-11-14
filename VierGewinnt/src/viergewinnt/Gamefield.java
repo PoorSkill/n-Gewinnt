@@ -7,17 +7,28 @@ package viergewinnt;
  *
  */
 public class Gamefield {
-	static int fieldSize = 10;
-	char fields[][];
-	char stones[][];
+	static int defaultEmptyLines = 1;
+	static int defaultSpacer = 3;
+	static int fieldMax = 10 - 1;
+	char field[][];
+	Stone[] stones;
 
 	/**
-	 * Konstruktor fragt nach, welches Spielfeld gezeichnet werden soll
+	 * Konstruktor fragt nach, welches Spielfeld gezeichnet werden soll und erstellt
+	 * dieses
 	 * 
 	 * @param own
 	 */
 	Gamefield(boolean own) {
-		// TODO: einfach erst Komplette Feld und dann Steine darueber malen
+		field = new char[Gamefield.fieldMax][Gamefield.fieldMax];
+		stones = new Stone[Gamefield.fieldMax];
+		if (own == true) {
+			for (int i = 0; i < Gamefield.fieldMax; i++) {
+				for (int j = 0; j < Gamefield.fieldMax; j++) {
+					this.field[i][j] = '-';
+				}
+			}
+		}
 	}
 
 	/**

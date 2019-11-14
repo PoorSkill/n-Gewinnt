@@ -11,7 +11,8 @@ import java.util.Map;
  */
 public enum Strings {
 	RULES("Spielregeln:"), SETUP_PLAYER_NAME("Bitte Name eingeben: \n"), BOT_NAME("Bot"), COLOR_RED_NAME("red"),
-	COLOR_BLUE_NAME("blue"), RUN_CHECK_QUESTION("\"Soll das Programm wiederholt werden? (y/n)");
+	COLOR_BLUE_NAME("blue"), RUN_CHECK_QUESTION("Soll das Programm wiederholt werden? (y/n)"),
+	PLAYER_NAME_INTRO("Player ");
 	String content;
 
 	/**
@@ -21,6 +22,25 @@ public enum Strings {
 	 */
 	Strings(String content) {
 		this.content = content;
+	}
+
+	/**
+	 * setter von content
+	 * 
+	 * @return content des Objektes
+	 */
+	String getContent() {
+		return this.content;
+	}
+
+	/**
+	 * setter von content
+	 * 
+	 * @param newContent
+	 */
+	@SuppressWarnings("unused")
+	private void setContent(String newContent) {
+		this.content = newContent;
 	}
 
 	/**
