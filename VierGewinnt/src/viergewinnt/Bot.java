@@ -1,5 +1,7 @@
 package viergewinnt;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Bot fuer Einzelspieler
  * 
@@ -23,12 +25,12 @@ public class Bot {
 	 * @return freie Farbe
 	 */
 	Color checkFreeColor() {
-		// TODO: ez
+		// TODO: ez -> funktioniert noch nicht!!!
 		Color freeColor;
 		if (Color.BLUE.free) {
-			freeColor = Color.BLUE;
-		} else {
 			freeColor = Color.RED;
+		} else {
+			freeColor = Color.BLUE;
 		}
 		return freeColor;
 	}
@@ -53,6 +55,8 @@ public class Bot {
 	}
 
 	int randomXPos() {
-		return (int) (Math.random() * 10);
+		int min = 0;
+		int max = Gamefield.fieldMax;
+		return ThreadLocalRandom.current().nextInt(min, max + 1);
 	}
 }

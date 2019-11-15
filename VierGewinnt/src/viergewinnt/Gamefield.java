@@ -20,8 +20,8 @@ public class Gamefield {
 	 * @param own
 	 */
 	Gamefield(boolean own) {
-		field = new char[Gamefield.fieldMax][Gamefield.fieldMax];
-		stones = new Stone[Gamefield.fieldMax];
+		this.field = new char[Gamefield.fieldMax][Gamefield.fieldMax];
+		this.stones = new Stone[Gamefield.fieldMax];
 		if (own == true) {
 			for (int i = 0; i < Gamefield.fieldMax; i++) {
 				for (int j = 0; j < Gamefield.fieldMax; j++) {
@@ -32,14 +32,33 @@ public class Gamefield {
 	}
 
 	/**
-	 * Kontrolliert ob Stein plaziert werden darf und setzt ihn
+	 * Kontrolliert ob Stein plaziert werden darf und ruft register Stone oder gibt
+	 * false zurueck
 	 * 
 	 * @param stone
 	 * @return
 	 */
-	boolean registerStone(Stone stone) {
+	boolean checkLegalStone(Stone stone) {
 		// TODO: sehr aufwaendig und Kopfarbeit!
-		return true;
+		for (int i = fieldMax - 1; i >= 0; --i) {
+			if (this.field[stone.xPos][i] == '-') {
+				registerStone(stone, i);
+				return true;
+			}
+		}
+		System.out.println("Besetzt!");
+		return false;
+	}
+
+	/**
+	 * Setzt Stein
+	 * 
+	 * @param stone
+	 *
+	 */
+	void registerStone(Stone stone, int yPos) {
+		this.field[stone.xPos][yPos] = stone.color.shortTerm;
+		System.out.println("Stein korrekt gesetzt");
 	}
 
 }

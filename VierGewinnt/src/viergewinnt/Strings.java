@@ -12,7 +12,7 @@ import java.util.Map;
 public enum Strings {
 	RULES("Spielregeln:"), SETUP_PLAYER_NAME("Bitte Name eingeben: \n"), BOT_NAME("Bot"), COLOR_RED_NAME("red"),
 	COLOR_BLUE_NAME("blue"), RUN_CHECK_QUESTION("Soll das Programm wiederholt werden? (y/n)"),
-	PLAYER_NAME_INTRO("Player ");
+	PLAYER_NAME_INTRO("Player "), NEXT_MOVE("Wo soll der Stein als naechstes gesetzt werden?"),SPACER("-");
 	String content;
 
 	/**

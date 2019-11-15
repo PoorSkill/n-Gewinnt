@@ -35,9 +35,10 @@ public class Game {
 	 * @return true, falls es weiterlaufen soll
 	 */
 	public boolean runCheck(Scanner sc) {
+		emptyLines(3);
 		String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" };
 		System.out.println(Strings.RUN_CHECK_QUESTION.content);
-		String input = sc.nextLine().toLowerCase();
+		String input = sc.next().toLowerCase();
 		for (int i = 0; i <= possibleAnswersOfYes.length - 1; i++) {
 			if (input.equals(possibleAnswersOfYes[i])) {
 				return true;
@@ -55,9 +56,19 @@ public class Game {
 		// TODO: eine schoene Uebung zu Scanner und Kontruktoren
 
 		// test
-		Gamefield gamefieldTest = new Gamefield(true);
-		Player testPlayer = new Player();
-		testPlayer.printOwnField();
+		Player testPlayer = new Player("Testspieler", Color.BLUE);
+		Player player2 = new Player();
+		//
+		testPlayer.setOpponent(player2);
+		player2.setOpponent(testPlayer);
+		//
+		for (int i = 0; i < 3; --i) {
+			testPlayer.printOwnField();
+			testPlayer.setStone(sc, player2);
+			player2.printOwnField();
+			player2.setStone(sc, testPlayer);
+			testPlayer.printOwnField();
+		}
 	}
 
 	/**
@@ -98,9 +109,25 @@ public class Game {
 		}
 	}
 
+	/**
+	 * printed Leerzeichen
+	 * 
+	 * @param amount
+	 */
 	public static void spacer(int amount) {
 		for (int i = 0; i <= amount; ++i) {
 			System.out.print(" ");
+		}
+	}
+
+	static int inputAmountInt(Scanner input) { // Wenn input nicht int, wiederholt Eingabe
+		while (true) {
+			try {
+				return input.nextInt();
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("Wrong data type, try again!");
+				input.nextLine();
+			}
 		}
 	}
 

@@ -9,6 +9,7 @@ import java.util.Scanner;
  *
  */
 public class Player {
+	Player opponent;
 	String name;
 	Gamefield ownGamefield, opponentsGamefield;
 	Color color;
@@ -47,6 +48,24 @@ public class Player {
 		this.correctPlay = true;
 		this.won = false;
 		this.bot = false;
+	}
+
+	/**
+	 * setter von opponent (nicht geschuetzt!!)
+	 * 
+	 * @param opponentPlayer
+	 */
+	void setOpponent(Player opponentPlayer) {
+		this.opponent = opponentPlayer;
+	}
+
+	/**
+	 * getter von opponent
+	 * 
+	 * @return opponent des Objektes
+	 */
+	Player getOpponent() {
+		return this.opponent;
 	}
 
 	/**
@@ -152,6 +171,16 @@ public class Player {
 	 */
 	void setStone(Scanner sc, Player player2) {
 		// TODO: yap
+		System.out.println(Strings.NEXT_MOVE.content);
+		int xPos = Game.inputAmountInt(sc) - 1;
+		Stone stone = new Stone(xPos, 0, color);
+		// TODO: Ueberpruefen ob platz frei
+		if (ownGamefield.checkLegalStone(stone)) {
+			// reg stone
+//			ownGamefield.registerStone(stone, stone.getFreeYPos(stone, stone.xPos));
+		} else {
+			setStone(sc, player2);
+		}
 	}
 
 	/**
@@ -159,6 +188,7 @@ public class Player {
 	 * 
 	 */
 	public void printOwnField() {
+		this.ownGamefield = opponent.ownGamefield; // TODO: besser Version!
 		// TODO: einfach erst Komplette Feld und dann Steine darueber malen
 		int spacer = Gamefield.defaultSpacer; // TODO: enum? oder generalisieren
 		System.out.println(Strings.PLAYER_NAME_INTRO.content + this.name + ":");

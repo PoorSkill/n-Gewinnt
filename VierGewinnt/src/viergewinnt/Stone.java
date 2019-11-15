@@ -78,4 +78,16 @@ public class Stone {
 	private void setColor(Color newColor) {
 		this.color = newColor;
 	}
+
+	/**
+	 * Sucht den naechst moeglichen freien yPos Platz
+	 * 
+	 * @param stone
+	 * @param xPos
+	 * @return
+	 */
+	int getFreeYPos(Stone stone, int xPos) {
+		// TODO: naechst moeglichen freien Platz suchen
+		return 0;
+	}
 }
