@@ -9,6 +9,7 @@ import java.util.Scanner;
  *
  */
 public class Game {
+
 	Player player[];
 
 	/**
@@ -56,18 +57,27 @@ public class Game {
 		// TODO: eine schoene Uebung zu Scanner und Kontruktoren
 
 		// test
-		Player testPlayer = new Player("Testspieler", Color.BLUE);
+		Player player1 = new Player("Testspieler", Color.BLUE);
 		Player player2 = new Player();
 		//
-		testPlayer.setOpponent(player2);
-		player2.setOpponent(testPlayer);
-		//
-		for (int i = 0; i < 3; --i) {
-			testPlayer.printOwnField();
-			testPlayer.setStone(sc, player2);
+		player1.setOpponent(player2);
+		player2.setOpponent(player1);
+		// erste malen
+		// verschieben in play
+		while (player1.won == false || player2.won == false || player1.maxPlays == false || player2.maxPlays == false) {
+			player1.printOwnField();
+			player1.setStone(sc, player2);
+			if (player1.won || player1.maxPlays == true) {
+				player1.printOwnField();
+				break;
+			}
 			player2.printOwnField();
-			player2.setStone(sc, testPlayer);
-			testPlayer.printOwnField();
+			player2.setStone(sc, player1);
+			if (player1.won || player2.maxPlays == true) {
+				player1.printOwnField();
+				break;
+
+			}
 		}
 	}
 

@@ -9,11 +9,13 @@ import java.util.Scanner;
  *
  */
 public class Player {
-	Player opponent;
-	String name;
-	Gamefield ownGamefield, opponentsGamefield;
-	Color color;
-	boolean correctPlay, won, bot;
+	boolean maxPlays;
+	int plays; // Anzahl von Spielzuegen
+	Player opponent; // Gegenspieler des aktuellen Spielers
+	String name; // Name_Bezeichner des Spielers
+	Gamefield ownGamefield, opponentsGamefield; // eigene_gegnerische_Spielfeld
+	Color color; // Farbe der Steine des Spielers
+	boolean correctPlay, won, bot; // legaler Zug, gewonnen oder bot,
 	String[] xCordsIdentifiers = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" }; // Generalisieren,
 																											// kann bei
 																											// höheren
@@ -32,6 +34,8 @@ public class Player {
 		this.correctPlay = true;
 		this.won = false;
 		this.bot = false;
+		this.plays = 0;
+		this.maxPlays = false;
 	}
 
 	/**
@@ -48,6 +52,8 @@ public class Player {
 		this.correctPlay = true;
 		this.won = false;
 		this.bot = false;
+		this.plays = 0;
+		this.maxPlays = false;
 	}
 
 	/**
@@ -168,18 +174,25 @@ public class Player {
 	 * 
 	 * @param sc
 	 * @param player2
+	 * @return true, wenn gewonnen
 	 */
-	void setStone(Scanner sc, Player player2) {
+	boolean setStone(Scanner sc, Player player2) {
 		// TODO: yap
+		if (this.plays >= Gamefield.maxAmountOfPlays) {
+			System.out.println("Draw");
+			this.maxPlays = true;
+			return false;
+		}
 		System.out.println(Strings.NEXT_MOVE.content);
-		int xPos = Game.inputAmountInt(sc) - 1;
-		Stone stone = new Stone(xPos, 0, color);
+		Stone stone = new Stone(inputAmountInt(sc) - 1, 0, color);
 		// TODO: Ueberpruefen ob platz frei
-		if (ownGamefield.checkLegalStone(stone)) {
+		if (ownGamefield.checkLegalStone(stone, this)) {
+			return true;
 			// reg stone
 //			ownGamefield.registerStone(stone, stone.getFreeYPos(stone, stone.xPos));
 		} else {
-			setStone(sc, player2);
+			return setStone(sc, player2);
+
 		}
 	}
 
@@ -208,5 +221,26 @@ public class Player {
 		Game.emptyLines(Gamefield.defaultEmptyLines);
 	}
 
+	/**
+	 * Methode ueberprueft auf korrekte eingabe (int und im Wertebereich)
+	 * 
+	 * @param input
+	 * @return
+	 */
+	static int inputAmountInt(Scanner input) { // Wenn input nicht int oder zu grosser Wert wiederholt Eingabe
+		// TODO
+		while (true) {
+			try {
+				return input.nextInt();
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("Wrong data type, try again!");
+				input.nextLine();
+			} catch (java.lang.ArrayIndexOutOfBoundsException c) {
+				System.out.println(Strings.NOT_A_COORDINATE.content);
+				inputAmountInt(input);
+
+			}
+		}
+	}
 
 }

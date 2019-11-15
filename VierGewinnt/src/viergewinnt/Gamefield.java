@@ -11,6 +11,7 @@ public class Gamefield {
 	static int defaultEmptyLines = 1; // "
 	static int defaultSpacer = 3;// "
 	static int fieldMax = 10 - 1;
+	static int maxAmountOfPlays = (fieldMax * fieldMax) / 2; // maximale Anzahl von Zuegen
 	char field[][];
 	Stone[] stones;
 
@@ -39,11 +40,11 @@ public class Gamefield {
 	 * @param stone
 	 * @return
 	 */
-	boolean checkLegalStone(Stone stone) {
+	boolean checkLegalStone(Stone stone, Player player) {
 		// TODO: sehr aufwaendig und Kopfarbeit!
 		for (int i = fieldMax - 1; i >= 0; --i) {
 			if (this.field[stone.xPos][i] == '-') {
-				registerStone(stone, i);
+				registerStone(stone, i, player);
 				return true;
 			}
 		}
@@ -52,29 +53,38 @@ public class Gamefield {
 	}
 
 	/**
-	 * Setzt Stein
+	 * Setzt Stein und ruft smart gewinn ueberpruefer auf
 	 * 
 	 * @param stone
+	 * @return true, wenn gewonnen
 	 *
 	 */
-	void registerStone(Stone stone, int yPos) {
+	boolean registerStone(Stone stone, int yPos, Player player) {
 		this.field[stone.xPos][yPos] = stone.color.shortTerm;
+		++player.plays;
 		System.out.println("Stein korrekt gesetzt");
-		if (checkWin(stone.xPos, yPos)) {
-			System.out.println("WIR HABEN EINEN GEWINNER"); // TODO: verschieben mit return
+		if (checkWin(stone.xPos, yPos, player)) {
+			System.out.println("WIR HABEN EINEN GEWINNER\nSpieler " + player.name + " gewinnt!"); // TODO: verschieben
+																									// mit
+			return true;
 		}
+		return false;
 	}
 
 	/**
 	 * Optimierte gewonnen ueberpruefung
 	 * 
 	 * @param yPos
+	 * @return true, wenn gewonnen
 	 */
-	boolean checkWin(int xPos, int yPos) {
+	boolean checkWin(int xPos, int yPos, Player player) {
+		// TODO
 		// XPos ueberpruefung
 		for (int i = fieldMax - 1 - points4win; i > 0; --i) {
 			for (int j = 1; j < points4win; j++) {
 				if (field[xPos][i] != '-' && field[xPos][i] == field[xPos][i - j]) {
+					player.won = true;
+					System.out.println();
 					return true;
 				}
 			}
@@ -83,6 +93,7 @@ public class Gamefield {
 		for (int i = fieldMax - 1 - points4win; i > 0; --i) {
 			for (int j = 1; j < points4win; j++) {
 				if (field[yPos][i] != '-' && field[yPos][i] == field[yPos][i - j]) {
+					player.won = true;
 					return true;
 				}
 			}
