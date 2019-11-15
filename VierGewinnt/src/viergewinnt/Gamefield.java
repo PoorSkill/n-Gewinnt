@@ -7,8 +7,9 @@ package viergewinnt;
  *
  */
 public class Gamefield {
-	static int defaultEmptyLines = 1;
-	static int defaultSpacer = 3;
+	static int points4win = 2; // outsourcen
+	static int defaultEmptyLines = 1; // "
+	static int defaultSpacer = 3;// "
 	static int fieldMax = 10 - 1;
 	char field[][];
 	Stone[] stones;
@@ -59,6 +60,34 @@ public class Gamefield {
 	void registerStone(Stone stone, int yPos) {
 		this.field[stone.xPos][yPos] = stone.color.shortTerm;
 		System.out.println("Stein korrekt gesetzt");
+		if (checkWin(stone.xPos, yPos)) {
+			System.out.println("WIR HABEN EINEN GEWINNER"); // TODO: verschieben mit return
+		}
+	}
+
+	/**
+	 * Optimierte gewonnen ueberpruefung
+	 * 
+	 * @param yPos
+	 */
+	boolean checkWin(int xPos, int yPos) {
+		// XPos ueberpruefung
+		for (int i = fieldMax - 1 - points4win; i > 0; --i) {
+			for (int j = 1; j < points4win; j++) {
+				if (field[xPos][i] != '-' && field[xPos][i] == field[xPos][i - j]) {
+					return true;
+				}
+			}
+		}
+		// TODO: YPos ueberpruefung (noch nicht fertig)
+		for (int i = fieldMax - 1 - points4win; i > 0; --i) {
+			for (int j = 1; j < points4win; j++) {
+				if (field[yPos][i] != '-' && field[yPos][i] == field[yPos][i - j]) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }
