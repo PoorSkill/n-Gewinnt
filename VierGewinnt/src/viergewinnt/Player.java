@@ -184,7 +184,7 @@ public class Player {
 			return false;
 		}
 		System.out.println(Strings.NEXT_MOVE.content);
-		Stone stone = new Stone(inputAmountInt(sc) - 1, 0, color);
+		Stone stone = new Stone(checkIntInRangeOfCord(sc, Gamefield.fieldMax) - 1, 0, color);
 		// TODO: Ueberpruefen ob platz frei
 		if (ownGamefield.checkLegalStone(stone, this)) {
 			return true;
@@ -221,13 +221,22 @@ public class Player {
 		Game.emptyLines(Gamefield.defaultEmptyLines);
 	}
 
+	int checkIntInRangeOfCord(Scanner sc, int max) {
+		int input = Game.inputAmountInt(sc);
+		if (input > max) {
+			System.out.println(Strings.NOT_A_COORDINATE.content);
+			return checkIntInRangeOfCord(sc, max);
+		}
+		return input;
+	}
+
 	/**
 	 * Methode ueberprueft auf korrekte eingabe (int und im Wertebereich)
 	 * 
 	 * @param input
 	 * @return
 	 */
-	static int inputAmountInt(Scanner input) { // Wenn input nicht int oder zu grosser Wert wiederholt Eingabe
+	int inputAmountInt(Scanner input, int max) { // Wenn input nicht int oder zu grosser Wert wiederholt Eingabe
 		// TODO
 		while (true) {
 			try {
@@ -235,11 +244,13 @@ public class Player {
 			} catch (java.util.InputMismatchException e) {
 				System.out.println("Wrong data type, try again!");
 				input.nextLine();
-			} catch (java.lang.ArrayIndexOutOfBoundsException c) {
-				System.out.println(Strings.NOT_A_COORDINATE.content);
-				inputAmountInt(input);
-
-			}
+			} /*
+				 * catch (java.lang.ArrayIndexOutOfBoundsException c) {
+				 * System.out.println(Strings.NOT_A_COORDINATE.content); input.hasNextLine(); //
+				 * inputAmountInt(input, Gamefield.fieldMax);
+				 * 
+				 * }
+				 */
 		}
 	}
 
