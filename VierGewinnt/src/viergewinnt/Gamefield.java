@@ -7,7 +7,7 @@ package viergewinnt;
  *
  */
 public class Gamefield {
-	static int points4win = 2; // outsourcen
+	static int points4win = 4 - 2; // outsourcen
 	static int defaultEmptyLines = 1; // "
 	static int defaultSpacer = 3;// "
 	static int fieldMax = 10 - 1;

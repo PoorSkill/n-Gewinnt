@@ -9,6 +9,8 @@ import java.util.Scanner;
  *
  */
 public class Game {
+	static String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" };
+	static String[] possibleAnswersOfNo = { "n", "0", "no", "false", "nein", "stop", "nah", "na" };
 
 	Player player[];
 
@@ -37,11 +39,10 @@ public class Game {
 	 */
 	public boolean runCheck(Scanner sc) {
 		emptyLines(3);
-		String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" };
 		System.out.println(Strings.RUN_CHECK_QUESTION.content);
 		String input = sc.next().toLowerCase();
-		for (int i = 0; i <= possibleAnswersOfYes.length - 1; i++) {
-			if (input.equals(possibleAnswersOfYes[i])) {
+		for (int i = 0; i <= Game.possibleAnswersOfYes.length - 1; i++) {
+			if (input.equals(Game.possibleAnswersOfYes[i])) {
 				return true;
 			}
 		}
@@ -55,42 +56,56 @@ public class Game {
 	 */
 	void query(Scanner sc) {
 		// TODO: eine schoene Uebung zu Scanner und Kontruktoren
-
-		// test
-		Player player1 = new Player("Testspieler", Color.BLUE);
-		Player player2 = new Player();
-		//
+		System.out.println(Strings.PLEASE_INSERT_NAME.content);
+		Player player1 = new Player(sc.next(), Color.BLUE);
+		Player player2 = set2cndPlayer(sc);
+		// TODO: Optimierung (Gamefield copy)
 		player1.setOpponent(player2);
 		player2.setOpponent(player1);
-		// erste malen
 		// verschieben in play
-		while (player1.won == false || player2.won == false || player1.maxPlays == false || player2.maxPlays == false) {
-			player1.printOwnField();
-			player1.setStone(sc, player2);
-			if (player1.won || player1.maxPlays == true) {
-				player1.printOwnField();
-				break;
-			}
-			player2.printOwnField();
-			player2.setStone(sc, player1);
-			if (player1.won || player2.maxPlays == true) {
-				player1.printOwnField();
-				break;
+		this.play(player1, player2, sc);
+	}
 
-			}
+	/**
+	 * Aussuchen des 2.Spielers
+	 * 
+	 * @param sc
+	 * @return spieler2 (Bot oder manueller Spieler)
+	 */
+	Player set2cndPlayer(Scanner sc) {
+		Player player2;
+		if (singlePlayerQuestion(sc)) {
+			player2 = new Player();
+
+		} else {
+			System.out.println(Strings.PLEASE_INSERT_NAME.content);
+			player2 = new Player(sc.nextLine(), Color.RED);
 		}
+		return player2;
 	}
 
 	/**
 	 * Abfrage ob Einzel- oder Mehrerspieler
 	 * 
 	 * @param sc
-	 * @return
+	 * @return true, wenn ja - false, wenn nein
 	 */
-	Player singlePlayer(Scanner sc) {
+	boolean singlePlayerQuestion(Scanner sc) {
 		// TODO: abfrage und ausfuellung des Kontruktors
-		Player player2 = null;
-		return player2;
+		emptyLines(3);
+		System.out.println(Strings.SINGLEPLAYER_QUESTION.content);
+		String input = sc.next().toLowerCase();
+		for (int i = 0; i <= Game.possibleAnswersOfYes.length - 1; i++) {
+			if (input.equals(Game.possibleAnswersOfYes[i])) {
+				return true;
+			}
+		}
+		for (int i = 0; i <= Game.possibleAnswersOfYes.length - 1; i++) {
+			if (input.equals(Game.possibleAnswersOfYes[i])) {
+				return false;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -103,7 +118,20 @@ public class Game {
 	 */
 	void play(Player player1, Player player2, Scanner sc) {
 		// TODO: einfacher aufruf der Methoden der Klasse Player
-
+		while (player1.won == false || player2.won == false || player1.maxPlays == false || player2.maxPlays == false) {
+			player1.printOwnField();
+			player1.setStone(sc, player2);
+			if (player1.won || player1.maxPlays == true) {
+				player1.printOwnField();
+				break;
+			}
+			player2.printOwnField();
+			player2.setStone(sc, player1);
+			if (player1.won || player2.maxPlays == true) {
+				player1.printOwnField();
+				break;
+			}
+		}
 	}
 
 	/**
@@ -130,7 +158,13 @@ public class Game {
 		}
 	}
 
-	static int inputAmountInt(Scanner input) { // Wenn input nicht int, wiederholt Eingabe
+	/**
+	 * Wenn input nicht int, wiederholt Eingabe
+	 * 
+	 * @param input
+	 * @return
+	 */
+	static int inputAmountInt(Scanner input) {
 		while (true) {
 			try {
 				return input.nextInt();
