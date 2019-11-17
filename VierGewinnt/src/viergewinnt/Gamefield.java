@@ -82,6 +82,10 @@ public class Gamefield {
 		// XPos ueberpruefung
 		byte pointsCount;
 		for (int i = field.length - 1; i >= 0; --i) {
+			if (i < Game.points4win) {
+				break;
+			}
+			System.out.println("i amount ypos" + i);
 			pointsCount = 1;
 			for (int j = 1; j < Game.points4win; ++j) { // 1 -2 - 3 - 4
 				if (field[xPos][i] != '-' && field[xPos][i] == field[xPos][i - j]) { // 1 -2 -3 - 4
@@ -89,21 +93,34 @@ public class Gamefield {
 					System.out.println("PointsCount" + pointsCount);
 					if (pointsCount >= Game.points4win) {
 						player.won = true;
-						System.out.println(
-								"XPos:" + (xPos + 1) + " YPos: " + (9 - i) + " bis " + ((9 - i) + Game.points4win));
+						System.out.println("XPos:" + (xPos + 1) + " YPos: " + (9 - i) + " bis "
+								+ ((9 - i) + (Game.points4win - 1)));
 						return true;
 					}
 				}
 			}
 		}
 		// TODO: YPos ueberpruefung (noch nicht fertig)
-		/*
-		 * pointsCount = 0; for (int i = fieldMax - 1 - points4win; i > 0; --i) {
-		 * pointsCount = 0; for (int j = 1; j < points4win; j++) { if (field[yPos][i] !=
-		 * '-' && field[yPos][i] == field[yPos][i - j]) { player.won = true; return
-		 * true; } } }
-		 */
-		pointsCount = 0; // redundant wegen Methoden garbage collector
+		for (int i = field.length - 1; i >= 1; --i) {
+			System.out.println("i amount xpos" + i);
+			pointsCount = 1;
+			if (i < Game.points4win) {
+				break;
+			}
+			for (int j = 1; j < Game.points4win; ++j) { // 1 -2 - 3 - 4
+				if (field[i][yPos] != '-' && field[i][yPos] == field[i - j][yPos]) { // 1 -2 -3 - 4
+					++pointsCount;// 1- 2 -3 4
+					System.out.println("PointsCount" + pointsCount);
+					if (pointsCount >= Game.points4win) {
+						player.won = true;
+						System.out.println("XPos:" + (xPos + 1) + " bis " + ((9 - i) + (Game.points4win - 1))
+								+ " YPos: " + (yPos + 1));
+						return true;
+
+					}
+				}
+			}
+		}
 		return false;
 	}
 
