@@ -1,5 +1,6 @@
 package viergewinnt;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,11 +12,31 @@ import java.util.Map;
  */
 public enum Strings {
 	RULES("Spielregeln:"), SETUP_PLAYER_NAME("Bitte Name eingeben: \n"), BOT_NAME("Bot"), COLOR_RED_NAME("red"),
-	COLOR_BLUE_NAME("blue"), RUN_CHECK_QUESTION("Soll das Programm wiederholt werden? (y/n)"),
-	PLAYER_NAME_INTRO("Player "), NEXT_MOVE("Wo soll der Stein als naechstes gesetzt werden?"), SPACER("-"),
+	COLOR_BLUE_NAME("blue"), COLOR_GREEN_NAME("green"),
+	RUN_CHECK_QUESTION("Soll das Programm wiederholt werden? (y/n)"), PLAYER_NAME_INTRO("Player "),
+	NEXT_MOVE("Wo soll der Stein als naechstes gesetzt werden?"), SPACER("-"),
 	NOT_A_COORDINATE("Nicht auf dem Koordinatensystem\nVersuche es erneut:"),
-	SINGLEPLAYER_QUESTION("Einzelspieler? (y/n)"), PLEASE_INSERT_NAME("Bitte gebe deinen Namen ein:\n");
+	SINGLEPLAYER_QUESTION("Einzelspieler? (y/n)"), PLEASE_INSERT_NAME("Bitte gebe deinen Namen ein:\n"),
+	CHANGE_RULES_START(
+			"Welche Regeln wollen sie aendern?\n(1):Punkteanzahl zum gewinnen\n(2):Spieler\n(3)Sprache\n\n(e):Verlassen der Einstellungen"),
+	UNKOWN_INPUT("Unbekannter Eingang!"), TRY_AGAIN("Versuchen sie es erneut"), YOU_PICKED("Sie waehlten aus: "),
+	HOW_MANY_POINTS("Wie viele Punkte wollen sie zum gewinnen benoetigen?"),
+	NUMBER_CANT_BE_HIGHER_THAN_GAMEFIELD_SIZE("Punktzahl kann nicht groesser sein wie das Spielfeld"),
+	WANNA_CHANGE_RULES("Wollen sie Regeln aendern?"), CHOOSE_COLOR("Wahele eine Farbe aus!\n(b)lau,(r)ot,(g)ruen"),
+	NOT_FREE("Ihre Auswahl ist nicht frei!"), SUCCESSFULLY_PICKED("Erfolgfreich ausgewahlt: ");
 	String content;
+
+	static String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" }; // Array fuer
+	// moegliche
+	// Antworten auf
+	// "Ja"
+	static String[] possibleAnswersOfNo = { "n", "0", "no", "false", "nein", "stop", "nah", "na" }; // Array fuer
+	// moegliche
+	// Antworten auf
+	// "Nein"
+	static String[] usedNames = { "Bot", "Guy","platzhalter0","platzhalter1" }; // Array aus besetzten Namen fuer den Spieler TODO: in Liste umwandeln
+
+	static ArrayList<String> usedNamesList = new ArrayList<>(); // Namelist der nicht freien Spielernamen
 
 	/**
 	 * Konstruktor
@@ -57,4 +78,25 @@ public enum Strings {
 		getStringByIndex.put(1, SETUP_PLAYER_NAME);
 		return getStringByIndex.get(index);
 	}
+
+	/**
+	 * Fuegt neue Namen fuer der usedNamesList hinzu
+	 * TODO: in Liste umwandeln
+	 * @param newName
+	 */
+	public static void addUsedName(String newName) {
+		usedNamesList.add("Bot");
+		usedNamesList.add("Guy");
+		usedNamesList.add(newName);
+	}
+
+	/**
+	 * Entfernt Namen aus usedNamesList
+	 * TODO: in Liste umwandeln
+	 * @param removeName
+	 */
+	public void removeUsedName(String removeName) {
+		usedNamesList.remove(removeName);
+	}
+
 }

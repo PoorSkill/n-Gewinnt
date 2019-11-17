@@ -47,6 +47,7 @@ public class Player {
 	Player(String name, Color color) {
 		this.name = name;
 		this.color = color;
+		color.setColorUsed();
 		this.ownGamefield = new Gamefield(true);
 		this.opponentsGamefield = new Gamefield(false);
 		this.correctPlay = true;
@@ -177,19 +178,15 @@ public class Player {
 	 * @return true, wenn gewonnen
 	 */
 	boolean setStone(Scanner sc, Player player2) {
-		// TODO: yap
-		if (this.plays >= Gamefield.maxAmountOfPlays) {
+		if (this.plays >= Game.maxAmountOfPlays) {
 			System.out.println("Draw");
 			this.maxPlays = true;
 			return false;
 		}
 		System.out.println(Strings.NEXT_MOVE.content);
 		Stone stone = new Stone(checkIntInRangeOfCord(sc, Gamefield.fieldMax) - 1, 0, color);
-		// TODO: Ueberpruefen ob platz frei
 		if (ownGamefield.checkLegalStone(stone, this)) {
 			return true;
-			// reg stone
-//			ownGamefield.registerStone(stone, stone.getFreeYPos(stone, stone.xPos));
 		} else {
 			return setStone(sc, player2);
 
@@ -202,7 +199,6 @@ public class Player {
 	 */
 	public void printOwnField() {
 		this.ownGamefield = opponent.ownGamefield; // TODO: besser Version!
-		// TODO: einfach erst Komplette Feld und dann Steine darueber malen
 		int spacer = Gamefield.defaultSpacer; // TODO: enum? oder generalisieren
 		System.out.println(Strings.PLAYER_NAME_INTRO.content + this.name + ":");
 		Game.emptyLines(Gamefield.defaultEmptyLines * 3);

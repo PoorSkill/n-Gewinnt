@@ -7,7 +7,7 @@ package viergewinnt;
  *
  */
 public class Stone {
-	int xPos, yPos; // TODO: Vektor
+	int xPos, yPos;
 	Color color;
 
 	/**
@@ -79,16 +79,15 @@ public class Stone {
 		this.color = newColor;
 	}
 
-	/**
-	 * Sucht den naechst moeglichen freien yPos Platz (momentan noch in
-	 * Gamefield.legalStone)
-	 * 
-	 * @param stone
-	 * @param xPos
-	 * @return
-	 */
-	int getFreeYPos(Stone stone, int xPos) {
-		// TODO: naechst moeglichen freien Platz suchen
-		return 0;
-	}
+//	/**
+//	 * Sucht den naechst moeglichen freien yPos Platz (momentan noch in
+//	 * Gamefield.legalStone)
+//	 * 
+//	 * @param stone
+//	 * @param xPos
+//	 * @return
+//	 */
+//	int getFreeYPos(Stone stone, int xPos) {
+////		return 0;
+//	}
 }

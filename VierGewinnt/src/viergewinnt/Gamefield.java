@@ -7,13 +7,11 @@ package viergewinnt;
  *
  */
 public class Gamefield {
-
-	static int defaultEmptyLines = 1; // "
-	static int defaultSpacer = 3;// "
-	static int fieldMax = 10 - 1;
-	static int maxAmountOfPlays = (fieldMax * fieldMax) / 2; // maximale Anzahl von Zuegen
-	char field[][];
-	Stone[] stones;
+	static int defaultEmptyLines = 1; // Standart Abstand fuer Ausgabe des Spieles in der Konsole
+	static int defaultSpacer = 3; // Standart Abstand fuer Ausgabe des Spieles in der Konsole
+	static int fieldMax = 10 - 1; // Groesse des Spielfeldes
+	char field[][]; // Das Spielfeld
+	Stone[] stones; // Die Steine des Spieles
 
 	/**
 	 * Konstruktor fragt nach, welches Spielfeld gezeichnet werden soll und erstellt
@@ -41,7 +39,6 @@ public class Gamefield {
 	 * @return
 	 */
 	boolean checkLegalStone(Stone stone, Player player) {
-		// TODO: sehr aufwaendig und Kopfarbeit!
 		for (int i = fieldMax - 1; i >= 0; --i) {
 			if (this.field[stone.xPos][i] == '-') {
 				registerStone(stone, i, player);
@@ -64,8 +61,7 @@ public class Gamefield {
 		++player.plays;
 		System.out.println("Stein korrekt gesetzt");
 		if (checkWin(stone.xPos, yPos, player)) {
-			System.out.println("WIR HABEN EINEN GEWINNER\nSpieler " + player.name + " gewinnt!"); // TODO: verschieben
-																									// mit
+			System.out.println("WIR HABEN EINEN GEWINNER\nSpieler " + player.name + " gewinnt!");
 			return true;
 		}
 		return false;
@@ -78,7 +74,6 @@ public class Gamefield {
 	 * @return true, wenn gewonnen
 	 */
 	private boolean checkWin(int xPos, int yPos, Player player) {
-		// TODO
 		// XPos ueberpruefung
 		byte pointsCount;
 		for (int i = field.length - 1; i >= 0; --i) {
@@ -100,7 +95,7 @@ public class Gamefield {
 				}
 			}
 		}
-		// TODO: YPos ueberpruefung (noch nicht fertig)
+		// YPos ueberpruefung
 		for (int i = field.length - 1; i >= 1; --i) {
 			System.out.println("i amount xpos" + i);
 			pointsCount = 1;

@@ -28,9 +28,11 @@ public class Bot {
 		// TODO: ez -> funktioniert noch nicht!!!
 		Color freeColor;
 		if (Color.BLUE.free) {
+			freeColor = Color.BLUE;
+		} else if (Color.RED.free) {
 			freeColor = Color.RED;
 		} else {
-			freeColor = Color.BLUE;
+			freeColor = Color.GREEN;
 		}
 		return freeColor;
 	}
