@@ -80,7 +80,8 @@ public class Stone {
 	}
 
 	/**
-	 * Sucht den naechst moeglichen freien yPos Platz
+	 * Sucht den naechst moeglichen freien yPos Platz (momentan noch in
+	 * Gamefield.legalStone)
 	 * 
 	 * @param stone
 	 * @param xPos

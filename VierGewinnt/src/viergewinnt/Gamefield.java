@@ -7,7 +7,7 @@ package viergewinnt;
  *
  */
 public class Gamefield {
-	static int points4win = 4 - 2; // outsourcen
+
 	static int defaultEmptyLines = 1; // "
 	static int defaultSpacer = 3;// "
 	static int fieldMax = 10 - 1;
@@ -59,7 +59,7 @@ public class Gamefield {
 	 * @return true, wenn gewonnen
 	 *
 	 */
-	boolean registerStone(Stone stone, int yPos, Player player) {
+	private boolean registerStone(Stone stone, int yPos, Player player) {
 		this.field[stone.xPos][yPos] = stone.color.shortTerm;
 		++player.plays;
 		System.out.println("Stein korrekt gesetzt");
@@ -77,27 +77,33 @@ public class Gamefield {
 	 * @param yPos
 	 * @return true, wenn gewonnen
 	 */
-	boolean checkWin(int xPos, int yPos, Player player) {
+	private boolean checkWin(int xPos, int yPos, Player player) {
 		// TODO
 		// XPos ueberpruefung
-		for (int i = fieldMax - 1 - points4win; i > 0; --i) {
-			for (int j = 1; j < points4win; j++) {
-				if (field[xPos][i] != '-' && field[xPos][i] == field[xPos][i - j]) {
-					player.won = true;
-					System.out.println();
-					return true;
+		byte pointsCount;
+		for (int i = field.length - 1; i >= 0; --i) {
+			pointsCount = 1;
+			for (int j = 1; j < Game.points4win; ++j) { // 1 -2 - 3 - 4
+				if (field[xPos][i] != '-' && field[xPos][i] == field[xPos][i - j]) { // 1 -2 -3 - 4
+					++pointsCount;// 1- 2 -3 4
+					System.out.println("PointsCount" + pointsCount);
+					if (pointsCount >= Game.points4win) {
+						player.won = true;
+						System.out.println(
+								"XPos:" + (xPos + 1) + " YPos: " + (9 - i) + " bis " + ((9 - i) + Game.points4win));
+						return true;
+					}
 				}
 			}
 		}
 		// TODO: YPos ueberpruefung (noch nicht fertig)
-		for (int i = fieldMax - 1 - points4win; i > 0; --i) {
-			for (int j = 1; j < points4win; j++) {
-				if (field[yPos][i] != '-' && field[yPos][i] == field[yPos][i - j]) {
-					player.won = true;
-					return true;
-				}
-			}
-		}
+		/*
+		 * pointsCount = 0; for (int i = fieldMax - 1 - points4win; i > 0; --i) {
+		 * pointsCount = 0; for (int j = 1; j < points4win; j++) { if (field[yPos][i] !=
+		 * '-' && field[yPos][i] == field[yPos][i - j]) { player.won = true; return
+		 * true; } } }
+		 */
+		pointsCount = 0; // redundant wegen Methoden garbage collector
 		return false;
 	}
 

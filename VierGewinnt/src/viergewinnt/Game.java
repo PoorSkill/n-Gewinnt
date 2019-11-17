@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Game {
 	static String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" };
 	static String[] possibleAnswersOfNo = { "n", "0", "no", "false", "nein", "stop", "nah", "na" };
+	static int points4win = 4; // outsourcen
 
 	Player player[];
 
@@ -79,7 +80,7 @@ public class Game {
 
 		} else {
 			System.out.println(Strings.PLEASE_INSERT_NAME.content);
-			player2 = new Player(sc.nextLine(), Color.RED);
+			player2 = new Player(sc.next(), Color.RED);
 		}
 		return player2;
 	}
@@ -127,8 +128,8 @@ public class Game {
 			}
 			player2.printOwnField();
 			player2.setStone(sc, player1);
-			if (player1.won || player2.maxPlays == true) {
-				player1.printOwnField();
+			if (player2.won || player2.maxPlays == true) {
+				player2.printOwnField();
 				break;
 			}
 		}
