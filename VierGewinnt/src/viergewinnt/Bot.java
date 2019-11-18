@@ -16,7 +16,6 @@ public class Bot {
 	 * Standart Konstruktor
 	 */
 	Bot() {
-
 	}
 
 	/**
@@ -56,9 +55,14 @@ public class Bot {
 		this.active = newActive;
 	}
 
+	/**
+	 * gibt zufaellige und moegliche xPos fuer den Stein zurueck
+	 * 
+	 * @return
+	 */
 	static int randomXPos() {
 		int min = 0;
-		int randomIntInRange = ThreadLocalRandom.current().nextInt(min, Gamefield.fieldMax);
+		int randomIntInRange = ThreadLocalRandom.current().nextInt(min, Gamefield.fieldMax + 1);
 		if (randomIntInRange > Gamefield.fieldMax || randomIntInRange <= 0) {
 			return randomXPos();
 		} else {
@@ -66,6 +70,9 @@ public class Bot {
 		}
 	}
 
+	/*
+	 * setzt den Stein
+	 */
 	static Stone setStone(Color color) {
 		Stone stone = new Stone(randomXPos() - 1, color);
 		return stone;

@@ -120,6 +120,12 @@ public enum Color {
 		return false;
 	}
 
+	/**
+	 * Abfrage und Auswahl der Farbe
+	 * 
+	 * @param sc
+	 * @return freie Farbe
+	 */
 	static Color chooseColor(Scanner sc) {
 		System.out.println(Strings.CHOOSE_COLOR.content);
 		Color colorOfChoice;

@@ -99,15 +99,4 @@ public class Stone {
 		this.color = newColor;
 	}
 
-//	/**
-//	 * Sucht den naechst moeglichen freien yPos Platz (momentan noch in
-//	 * Gamefield.legalStone)
-//	 * 
-//	 * @param stone
-//	 * @param xPos
-//	 * @return
-//	 */
-//	int getFreeYPos(Stone stone, int xPos) {
-////		return 0;
-//	}
 }

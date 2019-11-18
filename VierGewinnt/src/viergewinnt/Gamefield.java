@@ -82,9 +82,9 @@ public class Gamefield {
 				break;
 			}
 			pointsCount = 0;
-			for (int j = 0; j < Game.points4win; ++j) { // 1 -2 - 3 - 4
-				if (field[xPos][i] != '-' && field[xPos][i] == field[xPos][i - j]) { // 1 -2 -3 - 4
-					++pointsCount;// 1- 2 -3 4
+			for (int j = 0; j < Game.points4win; ++j) {
+				if (field[xPos][i] != '-' && field[xPos][i] == field[xPos][i - j]) {
+					++pointsCount;
 					if (pointsCount >= Game.points4win) {
 						System.out.println(player.name + Strings.PLAYER_GOT_POINTS.content + pointsCount);
 						player.won = true;
@@ -104,18 +104,16 @@ public class Gamefield {
 			if (i < Game.points4win - 1) {
 				break;
 			}
-			for (int j = 0; j < Game.points4win; ++j) { // 1 -2 - 3 - 4
-				if (field[i][yPos] != '-' && field[i][yPos] == field[i - j][yPos]) { // 1 -2 -3 - 4
-					++pointsCount;// 1- 2 -3 4
+			for (int j = 0; j < Game.points4win; ++j) {
+				if (field[i][yPos] != '-' && field[i][yPos] == field[i - j][yPos]) {
+					++pointsCount;
 					if (pointsCount >= Game.points4win) {
 						System.out.println(player.name + Strings.PLAYER_GOT_POINTS.content + pointsCount);
 						player.won = true;
-						char posCharXPos0 = (char) ('A' - 1 + (j) - 2); // + xPos -Game.points4win)
+						char posCharXPos0 = (char) ('A' - 1 + (j) - 2);
 						char posCharXPos1 = (char) ('A' - 1 + ((j + Game.points4win)) - 2);
 						System.out.println(posCharXPos0 + "-" + (yPos - Gamefield.fieldMax) * (-1) + " bis "
 								+ posCharXPos1 + "-" + (yPos - Gamefield.fieldMax) * (-1));
-//						System.out.println("XPos:" + (xPos - Game.points4win) + " bis "
-//								+ ((9 - i - 1) + (Game.points4win - 1)) + " YPos: " + (i - Gamefield.fieldMax) * (-1)); // TODO
 						return true;
 					}
 				} else {

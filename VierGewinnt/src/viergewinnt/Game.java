@@ -160,6 +160,8 @@ public class Game {
 	}
 
 	/**
+	 * setter von points4win
+	 * 
 	 * Aendert die Anzahl von Punkten die man braucht um zu gewinnen und ueberprueft
 	 * ihre legalitaet
 	 * 
@@ -214,12 +216,7 @@ public class Game {
 		}
 	}
 
-	/**
-	 * Abfrage und Auswahl der Farbe
-	 * 
-	 * @param sc
-	 * @return freie Farbe
-	 */
+
 
 	/**
 	 * Abfrage und Auswahl des Namens
