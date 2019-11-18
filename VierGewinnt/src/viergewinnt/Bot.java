@@ -56,9 +56,18 @@ public class Bot {
 		this.active = newActive;
 	}
 
-	int randomXPos() {
+	static int randomXPos() {
 		int min = 0;
-		int max = Gamefield.fieldMax;
-		return ThreadLocalRandom.current().nextInt(min, max + 1);
+		int randomIntInRange = ThreadLocalRandom.current().nextInt(min, Gamefield.fieldMax);
+		if (randomIntInRange > Gamefield.fieldMax || randomIntInRange <= 0) {
+			return randomXPos();
+		} else {
+			return randomIntInRange;
+		}
+	}
+
+	static Stone setStone(Color color) {
+		Stone stone = new Stone(randomXPos() - 1, color);
+		return stone;
 	}
 }

@@ -16,11 +16,11 @@ public class Player {
 	Gamefield ownGamefield, opponentsGamefield; // eigene_gegnerische_Spielfeld
 	Color color; // Farbe der Steine des Spielers
 	boolean correctPlay, won, bot; // legaler Zug, gewonnen oder bot,
-	String[] xCordsIdentifiers = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" }; // Generalisieren,
-																											// kann bei
-																											// höheren
-																											// sizeGamefield
-																											// helfen
+
+	// kann bei
+	// höheren
+	// sizeGamefield
+	// helfen
 
 	/**
 	 * Standart Konstruktor -> Bot
@@ -33,7 +33,7 @@ public class Player {
 		this.opponentsGamefield = new Gamefield(false);
 		this.correctPlay = true;
 		this.won = false;
-		this.bot = false;
+		this.bot = true;
 		this.plays = 0;
 		this.maxPlays = false;
 	}
@@ -183,8 +183,15 @@ public class Player {
 			this.maxPlays = true;
 			return false;
 		}
+		if (this.bot) {
+			if (ownGamefield.checkLegalStone(Bot.setStone(this.color), this)) {
+				return true;
+			} else {
+				return setStone(sc, player2);
+			}
+		}
 		System.out.println(Strings.NEXT_MOVE.content);
-		Stone stone = new Stone(checkIntInRangeOfCord(sc, Gamefield.fieldMax) - 1, 0, color);
+		Stone stone = new Stone(checkIntInRangeOfCord(sc, Gamefield.fieldMax) - 1, color);
 		if (ownGamefield.checkLegalStone(stone, this)) {
 			return true;
 		} else {
@@ -199,18 +206,21 @@ public class Player {
 	 */
 	public void printOwnField() {
 		this.ownGamefield = opponent.ownGamefield; // TODO: besser Version!
-		int spacer = Gamefield.defaultSpacer; // TODO: enum? oder generalisieren
 		System.out.println(Strings.PLAYER_NAME_INTRO.content + this.name + ":");
 		Game.emptyLines(Gamefield.defaultEmptyLines * 3);
+		Game.spacer(Gamefield.defaultSpacer);
 		for (int l = 0; l <= Gamefield.fieldMax - 1; ++l) {
-			System.out.print(this.xCordsIdentifiers[l]);
-			Game.spacer(spacer);
+			System.out.print(Strings.xCordsIdentifiers[l]);
+			Game.spacer(Gamefield.defaultSpacer);
 		}
 		Game.emptyLines(Gamefield.defaultEmptyLines * 3);
 		for (int i = 0; i < Gamefield.fieldMax; ++i) {
+			System.out.print((i - Gamefield.fieldMax) * (-1));
+			Game.spacer(Gamefield.defaultSpacer);
 			for (int j = 0; j < Gamefield.fieldMax; ++j) {
+
 				System.out.print(this.ownGamefield.field[j][i]);
-				Game.spacer(spacer);
+				Game.spacer(Gamefield.defaultSpacer);
 			}
 			Game.emptyLines(Gamefield.defaultEmptyLines);
 		}
@@ -218,8 +228,8 @@ public class Player {
 	}
 
 	int checkIntInRangeOfCord(Scanner sc, int max) {
-		int input = Game.inputAmountInt(sc);
-		if (input > max) {
+		int input = Game.inputAmountToCordInt(sc);
+		if (input > max || input <= 0) {
 			System.out.println(Strings.NOT_A_COORDINATE.content);
 			return checkIntInRangeOfCord(sc, max);
 		}

@@ -113,8 +113,8 @@ public class Game {
 	 * @param amount
 	 */
 	public static void spacer(int amount) {
-		for (int i = 0; i <= amount; ++i) {
-			System.out.print(" ");
+		for (int i = 1; i <= amount; ++i) {
+			System.out.print("\t");
 		}
 	}
 
@@ -131,6 +131,30 @@ public class Game {
 			} catch (java.util.InputMismatchException e) {
 				System.out.println("Wrong data type, try again!");
 				input.nextLine();
+			}
+		}
+	}
+
+	/**
+	 * Wenn input nicht int, ueberprueft ob input String mit char der Koordinate,
+	 * umwandeln der Koordinaten in zahlen fuer das Spielfeld
+	 * 
+	 * @param input
+	 * @return
+	 */
+	static int inputAmountToCordInt(Scanner input) {
+
+		while (true) {
+			try {
+				return input.nextInt();
+			} catch (java.util.InputMismatchException e) {
+				String string2Int = input.nextLine().toLowerCase();
+				if (string2Int.matches("[a-z]")) {
+					char firstLetterOfString = string2Int.charAt(0);
+					int cordOfChar = (int) firstLetterOfString - 97 + 1;
+					return cordOfChar;
+				}
+				System.out.println("Wrong data type, try again!");
 			}
 		}
 	}
@@ -168,20 +192,24 @@ public class Game {
 			case "1": // Punktzahl aendern
 				System.out.println(Strings.YOU_PICKED.content);
 				changePoints4Win(sc);
+				changeRules(sc);
 				break;
 			case "2": // Spieleranzahl aendern
 				System.out.println(Strings.YOU_PICKED.content);
 				// TODO: wenn langeweile, mehr wie einen Spieler hinzufuegen
+				changeRules(sc);
 				break;
 			case "3": // Sprache aendern
 				System.out.println(Strings.YOU_PICKED.content);
 				// TODO: wenn langeweile, mehr wie einen Sprache hinzufuegen
+				changeRules(sc);
 				break;
 			case "e": // verlassen
 				System.out.println(Strings.YOU_PICKED.content);
 				break;
 			default:
 				System.out.println(Strings.UNKOWN_INPUT.content + "\n" + Strings.TRY_AGAIN.content);
+				changeRules(sc);
 			}
 		}
 	}

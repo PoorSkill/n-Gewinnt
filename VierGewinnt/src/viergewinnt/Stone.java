@@ -16,9 +16,29 @@ public class Stone {
 	Stone() {
 	}
 
+	/**
+	 * Konstruktor Stone setzten vom Spielfeld
+	 * 
+	 * @param xPos
+	 * @param yPos
+	 * @param color
+	 */
 	Stone(int xPos, int yPos, Color color) {
 		this.xPos = xPos;
 		this.yPos = yPos;
+		this.color = color;
+	}
+
+	/**
+	 * Konstruktor Stone setzten vom Spieler
+	 * 
+	 * @param xPos
+	 * @param yPos
+	 * @param color
+	 */
+	Stone(int xPos, Color color) {
+		this.xPos = xPos;
+		this.yPos = 0;
 		this.color = color;
 	}
 

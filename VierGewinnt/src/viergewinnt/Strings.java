@@ -23,7 +23,7 @@ public enum Strings {
 	HOW_MANY_POINTS("Wie viele Punkte wollen sie zum gewinnen benoetigen?"),
 	NUMBER_CANT_BE_HIGHER_THAN_GAMEFIELD_SIZE("Punktzahl kann nicht groesser sein wie das Spielfeld"),
 	WANNA_CHANGE_RULES("Wollen sie Regeln aendern?"), CHOOSE_COLOR("Wahele eine Farbe aus!\n(b)lau,(r)ot,(g)ruen"),
-	NOT_FREE("Ihre Auswahl ist nicht frei!"), SUCCESSFULLY_PICKED("Erfolgfreich ausgewahlt: ");
+	NOT_FREE("Ihre Auswahl ist nicht frei!"), SUCCESSFULLY_PICKED("Erfolgfreich ausgewahlt: "),PLAYER_GOT_POINTS(" hat Punkte erzielt: ");
 	String content;
 
 	static String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" }; // Array fuer
@@ -34,9 +34,13 @@ public enum Strings {
 	// moegliche
 	// Antworten auf
 	// "Nein"
-	static String[] usedNames = { "Bot", "Guy","platzhalter0","platzhalter1" }; // Array aus besetzten Namen fuer den Spieler TODO: in Liste umwandeln
+	static String[] usedNames = { "Bot", "Guy", "platzhalter0", "platzhalter1" }; // Array aus besetzten Namen fuer den
+																					// Spieler TODO: in Liste umwandeln
 
 	static ArrayList<String> usedNamesList = new ArrayList<>(); // Namelist der nicht freien Spielernamen
+
+	static String[] xCordsIdentifiers = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
+			"P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }; // xKoordinaten Identifizierer
 
 	/**
 	 * Konstruktor
@@ -80,8 +84,8 @@ public enum Strings {
 	}
 
 	/**
-	 * Fuegt neue Namen fuer der usedNamesList hinzu
-	 * TODO: in Liste umwandeln
+	 * Fuegt neue Namen fuer der usedNamesList hinzu TODO: in Liste umwandeln
+	 * 
 	 * @param newName
 	 */
 	public static void addUsedName(String newName) {
@@ -91,8 +95,8 @@ public enum Strings {
 	}
 
 	/**
-	 * Entfernt Namen aus usedNamesList
-	 * TODO: in Liste umwandeln
+	 * Entfernt Namen aus usedNamesList TODO: in Liste umwandeln
+	 * 
 	 * @param removeName
 	 */
 	public void removeUsedName(String removeName) {

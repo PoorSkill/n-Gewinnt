@@ -8,8 +8,8 @@ package viergewinnt;
  */
 public class Gamefield {
 	static int defaultEmptyLines = 1; // Standart Abstand fuer Ausgabe des Spieles in der Konsole
-	static int defaultSpacer = 3; // Standart Abstand fuer Ausgabe des Spieles in der Konsole
-	static int fieldMax = 10 - 1; // Groesse des Spielfeldes
+	static int defaultSpacer = 1; // Standart Abstand fuer Ausgabe des Spieles in der Konsole
+	static int fieldMax = 10; // Groesse des Spielfeldes
 	char field[][]; // Das Spielfeld
 	Stone[] stones; // Die Steine des Spieles
 
@@ -74,45 +74,52 @@ public class Gamefield {
 	 * @return true, wenn gewonnen
 	 */
 	private boolean checkWin(int xPos, int yPos, Player player) {
-		// XPos ueberpruefung
+		// yPos ueberpruefung (Senkrecht)
+
 		byte pointsCount;
-		for (int i = field.length - 1; i >= 0; --i) {
-			if (i < Game.points4win) {
+		for (int i = field.length - 1; i > 0; --i) {
+			if (i < Game.points4win - 1) {
 				break;
 			}
-			System.out.println("i amount ypos" + i);
-			pointsCount = 1;
-			for (int j = 1; j < Game.points4win; ++j) { // 1 -2 - 3 - 4
+			pointsCount = 0;
+			for (int j = 0; j < Game.points4win; ++j) { // 1 -2 - 3 - 4
 				if (field[xPos][i] != '-' && field[xPos][i] == field[xPos][i - j]) { // 1 -2 -3 - 4
 					++pointsCount;// 1- 2 -3 4
-					System.out.println("PointsCount" + pointsCount);
 					if (pointsCount >= Game.points4win) {
+						System.out.println(player.name + Strings.PLAYER_GOT_POINTS.content + pointsCount);
 						player.won = true;
-						System.out.println("XPos:" + (xPos + 1) + " YPos: " + (9 - i) + " bis "
-								+ ((9 - i) + (Game.points4win - 1)));
+						char posCharXPos0 = (char) ('A' - 1 + (i - Gamefield.fieldMax) * (-1));
+						System.out.println(posCharXPos0 + "-" + (Gamefield.fieldMax - i) + " bis " + posCharXPos0 + "-"
+								+ (Gamefield.fieldMax - i + Game.points4win - 1));
 						return true;
 					}
+				} else {
+					pointsCount = 0;
 				}
 			}
 		}
-		// YPos ueberpruefung
-		for (int i = field.length - 1; i >= 1; --i) {
-			System.out.println("i amount xpos" + i);
-			pointsCount = 1;
-			if (i < Game.points4win) {
+		// xPos ueberpruefung (Horizontal)
+		for (int i = field.length - 1; i > 0; --i) {
+			pointsCount = 0;
+			if (i < Game.points4win - 1) {
 				break;
 			}
-			for (int j = 1; j < Game.points4win; ++j) { // 1 -2 - 3 - 4
+			for (int j = 0; j < Game.points4win; ++j) { // 1 -2 - 3 - 4
 				if (field[i][yPos] != '-' && field[i][yPos] == field[i - j][yPos]) { // 1 -2 -3 - 4
 					++pointsCount;// 1- 2 -3 4
-					System.out.println("PointsCount" + pointsCount);
 					if (pointsCount >= Game.points4win) {
+						System.out.println(player.name + Strings.PLAYER_GOT_POINTS.content + pointsCount);
 						player.won = true;
-						System.out.println("XPos:" + (xPos + 1) + " bis " + ((9 - i) + (Game.points4win - 1))
-								+ " YPos: " + (yPos + 1));
+						char posCharXPos0 = (char) ('A' - 1 + (j) - 2); // + xPos -Game.points4win)
+						char posCharXPos1 = (char) ('A' - 1 + ((j + Game.points4win)) - 2);
+						System.out.println(posCharXPos0 + "-" + (yPos - Gamefield.fieldMax) * (-1) + " bis "
+								+ posCharXPos1 + "-" + (yPos - Gamefield.fieldMax) * (-1));
+//						System.out.println("XPos:" + (xPos - Game.points4win) + " bis "
+//								+ ((9 - i - 1) + (Game.points4win - 1)) + " YPos: " + (i - Gamefield.fieldMax) * (-1)); // TODO
 						return true;
-
 					}
+				} else {
+					pointsCount = 0;
 				}
 			}
 		}
