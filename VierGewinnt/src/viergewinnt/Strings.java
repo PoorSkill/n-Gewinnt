@@ -22,8 +22,8 @@ public enum Strings {
 	UNKOWN_INPUT("Unbekannter Eingang!"), TRY_AGAIN("Versuchen sie es erneut"), YOU_PICKED("Sie waehlten aus: "),
 	HOW_MANY_POINTS("Wie viele Punkte wollen sie zum gewinnen benoetigen?"),
 	NUMBER_CANT_BE_HIGHER_THAN_GAMEFIELD_SIZE("Punktzahl kann nicht groesser sein wie das Spielfeld"),
-	WANNA_CHANGE_RULES("Wollen sie Regeln aendern?"), CHOOSE_COLOR("Wahele eine Farbe aus!\n(b)lau,(r)ot,(g)ruen"),
-	NOT_FREE("Ihre Auswahl ist nicht frei!"), SUCCESSFULLY_PICKED("Erfolgfreich ausgewahlt: "),PLAYER_GOT_POINTS(" hat Punkte erzielt: ");
+	WANNA_CHANGE_RULES("Wollen sie Regeln aendern?(y/n)"), CHOOSE_COLOR("Wahele eine Farbe aus!\n(b)lau,(r)ot,(g)ruen"),
+	NOT_FREE("Ihre Auswahl ist nicht frei!"), SUCCESSFULLY_PICKED("Erfolgfreich ausgewahlt: "),PLAYER_GOT_POINTS(" hat Punkte erzielt: "),NUMBER_NEEDS_TO_BE_HIGHER("Die Zahl muss groesser sein!");
 	String content;
 
 	static String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" }; // Array fuer

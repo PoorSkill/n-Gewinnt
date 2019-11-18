@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Game {
 	static int defaultEmptyLines = 3; // Game Konsolen abstand fuer die Befragung TODO: Einstellungen Klasse?
 	static int maxAmountOfPlays = (Gamefield.fieldMax * Gamefield.fieldMax) / 2; // maximale Anzahl von Zuegen
-	static int points4win = 4; // Punkteanzahl die benoetigt wird, um zu gewinnen //change rules
+	static int points4win = 4; // Punkteanzahl die benoetigt wird, um zu gewinnen
 	Player player[]; // reduntantes Array von den Spielern (speatere Anwedung bei Speicherung der
 						// Spielstaende)
 
@@ -143,7 +143,6 @@ public class Game {
 	 * @return
 	 */
 	static int inputAmountToCordInt(Scanner input) {
-
 		while (true) {
 			try {
 				return input.nextInt();
@@ -174,6 +173,10 @@ public class Game {
 		int input = inputAmountInt(sc);
 		if (input > Gamefield.fieldMax) {
 			System.out.println(Strings.NUMBER_CANT_BE_HIGHER_THAN_GAMEFIELD_SIZE.content);
+			System.out.println(Strings.TRY_AGAIN.content);
+			changePoints4Win(sc);
+		} else if (input <= 1) {
+			System.out.println(Strings.NUMBER_NEEDS_TO_BE_HIGHER.content);
 			System.out.println(Strings.TRY_AGAIN.content);
 			changePoints4Win(sc);
 		}
@@ -215,8 +218,6 @@ public class Game {
 			}
 		}
 	}
-
-
 
 	/**
 	 * Abfrage und Auswahl des Namens
