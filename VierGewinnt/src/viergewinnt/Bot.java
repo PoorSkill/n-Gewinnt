@@ -63,7 +63,7 @@ public class Bot {
 	static int randomXPos() {
 		int min = 0;
 		int randomIntInRange = ThreadLocalRandom.current().nextInt(min, Gamefield.fieldMax + 1);
-		if (randomIntInRange > Gamefield.fieldMax || randomIntInRange <= 0) {
+		if (randomIntInRange >= Gamefield.fieldMax + 1 || randomIntInRange <= 0) {
 			return randomXPos();
 		} else {
 			return randomIntInRange;
