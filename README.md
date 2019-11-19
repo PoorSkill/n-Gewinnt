@@ -18,11 +18,11 @@ Jeder Spieler platziert nacheinander einen Stein auf dem Spielfeld. Es kann nur 
 ![Wer braucht schon Vorbereitung oder ein Team](Pictures/GitHubAnton.png)
 
 **Nice2Know** *(keine wirklichen Features, aber trotzdem gut zu wissen)*
-    - Grundfunktionen wurden innerhalb von 2h von Anton nebenbei in einer Vorlesung programmiert :3 
-    - Es wurde alles so Anfängerfreundlich wie möglich gehalten, dh jeder mit Grundkenntnissen von Java und bisschen Köpfen könnte es auch        genau so programmieren
-    - Spielernamen/Farben sind einzigartig (weil es sonst auch etwas verwirrend wäre)
-    - Koordinaten können mit den Buchstaben oder den zugehörigen Zahlen eingegeben werden (Warum nicht)
-    - "y"/"n" sind nicht die einzigen Moeglichkeiten weiter zu kommen :)
-    - Fehlerkontrolle das keine Falscheingaben möglich sind (*es ist trivial dies zu erwähnen*)
+- Grundfunktionen wurden innerhalb von 2h von Anton nebenbei in einer Vorlesung programmiert :3 
+- Es wurde alles so Anfängerfreundlich wie möglich gehalten, dh jeder mit Grundkenntnissen von Java und bisschen Köpfen könnte es auch genau so programmieren
+- Spielernamen/Farben sind einzigartig (weil es sonst auch etwas verwirrend wäre)
+- Koordinaten können mit den Buchstaben oder den zugehörigen Zahlen eingegeben werden (Warum nicht)
+- "y"/"n" sind nicht die einzigen Moeglichkeiten weiter zu kommen :)
+- Fehlerkontrolle das keine Falscheingaben möglich sind (*es ist trivial dies zu erwähnen*)
 
 *DISCLAIMER*: Da keine Vorbereitung für dieses Projekt stattgefunden hat, bzw keine Planung oder Gedanken, sondern einfach drauf los geschrieben wurde (*ja ja ja ... ist schlecht ...*), ist dieses Projekt geringfügig verwirrend oder auch unnötig verkompliziert ... Sie wurden gewarnt :) Es gibt auch viele kleine Käfer :/
