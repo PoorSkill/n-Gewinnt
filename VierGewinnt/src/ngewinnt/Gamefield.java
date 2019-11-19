@@ -1,4 +1,4 @@
-package viergewinnt;
+package ngewinnt;
 
 /**
  * Spielfeld

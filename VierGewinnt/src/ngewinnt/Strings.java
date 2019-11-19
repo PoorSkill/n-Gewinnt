@@ -1,4 +1,4 @@
-package viergewinnt;
+package ngewinnt;
 
 import java.util.ArrayList;
 import java.util.HashMap;

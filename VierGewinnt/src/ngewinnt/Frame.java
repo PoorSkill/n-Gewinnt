@@ -1,4 +1,4 @@
-package viergewinnt;
+package ngewinnt;
 
 //
 //import java.awt.GridBagConstraints;
