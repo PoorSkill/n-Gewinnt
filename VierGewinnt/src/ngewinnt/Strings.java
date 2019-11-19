@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public enum Strings {
 	RULES("Spielregeln:"), SETUP_PLAYER_NAME("Bitte Name eingeben: \n"), BOT_NAME("Bot"), COLOR_RED_NAME("red"),
-	COLOR_BLUE_NAME("blue"), COLOR_GREEN_NAME("green"),
+	COLOR_BLUE_NAME("blue"), COLOR_GREEN_NAME("green"), COLOR_ORANGE_NAME("orange"),
 	RUN_CHECK_QUESTION("Soll das Programm wiederholt werden? (y/n)"), PLAYER_NAME_INTRO("Player "),
 	NEXT_MOVE("Wo soll der Stein als naechstes gesetzt werden?"), SPACER("-"),
 	NOT_A_COORDINATE("Nicht auf dem Koordinatensystem\nVersuche es erneut:"),
@@ -22,8 +22,10 @@ public enum Strings {
 	UNKOWN_INPUT("Unbekannter Eingang!"), TRY_AGAIN("Versuchen sie es erneut"), YOU_PICKED("Sie waehlten aus: "),
 	HOW_MANY_POINTS("Wie viele Punkte wollen sie zum gewinnen benoetigen?"),
 	NUMBER_CANT_BE_HIGHER_THAN_GAMEFIELD_SIZE("Punktzahl kann nicht groesser sein wie das Spielfeld"),
-	WANNA_CHANGE_RULES("Wollen sie Regeln aendern?(y/n)"), CHOOSE_COLOR("Wahele eine Farbe aus!\n(b)lau,(r)ot,(g)ruen"),
-	NOT_FREE("Ihre Auswahl ist nicht frei!"), SUCCESSFULLY_PICKED("Erfolgfreich ausgewahlt: "),PLAYER_GOT_POINTS(" hat Punkte erzielt: "),NUMBER_NEEDS_TO_BE_HIGHER("Die Zahl muss groesser sein!");
+	WANNA_CHANGE_RULES("Wollen sie Regeln aendern?(y/n)"),
+	CHOOSE_COLOR("Wahele eine Farbe aus!\n(b)lau,(r)ot,(g)ruen,(o)range"), NOT_FREE("Ihre Auswahl ist nicht frei!"),
+	SUCCESSFULLY_PICKED("Erfolgfreich ausgewahlt: "), PLAYER_GOT_POINTS(" hat Punkte erzielt: "),
+	NUMBER_NEEDS_TO_BE_HIGHER("Die Zahl muss groesser sein!");
 	String content;
 
 	static String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" }; // Array fuer

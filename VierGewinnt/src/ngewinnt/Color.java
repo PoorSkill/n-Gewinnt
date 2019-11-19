@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public enum Color {
 	RED(Strings.COLOR_RED_NAME.content, true, 'r'), BLUE(Strings.COLOR_BLUE_NAME.content, true, 'b'),
-	GREEN(Strings.COLOR_GREEN_NAME.content, true, 'g');
+	GREEN(Strings.COLOR_GREEN_NAME.content, true, 'g'), ORANGE(Strings.COLOR_ORANGE_NAME.content, true, 'o');
 	String name; // name der Farbe
 	boolean free; // true ist frei
 	char shortTerm; // Abkuerzung der Farbe
@@ -131,16 +131,20 @@ public enum Color {
 		Color colorOfChoice;
 		switch (sc.next()) {
 		case "r":
-			System.out.println(Strings.YOU_PICKED.content + Color.RED.name);
+			System.out.println(Strings.YOU_PICKED.content + Strings.COLOR_RED_NAME.content);
 			colorOfChoice = Color.RED;
 			break;
 		case "b":
-			System.out.println(Strings.YOU_PICKED.content + Color.BLUE.name);
+			System.out.println(Strings.YOU_PICKED.content + Strings.COLOR_BLUE_NAME.content);
 			colorOfChoice = Color.BLUE;
 			break;
 		case "g":
-			System.out.println(Strings.YOU_PICKED.content + Color.GREEN.name);
+			System.out.println(Strings.YOU_PICKED.content + Strings.COLOR_GREEN_NAME.content);
 			colorOfChoice = Color.GREEN;
+			break;
+		case "o":
+			System.out.println(Strings.YOU_PICKED.content + Strings.COLOR_ORANGE_NAME.content);
+			colorOfChoice = Color.ORANGE;
 			break;
 		default:
 			System.out.println(Strings.UNKOWN_INPUT.content + "\n" + Strings.TRY_AGAIN.content);
