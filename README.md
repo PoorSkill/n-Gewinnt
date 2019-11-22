@@ -1,6 +1,6 @@
 # n-Gewinnt
 n-Gewinnt Java Spiel um die Langeweile in GBI zu bekämpfen 
-*Random Lerngruppe: Anton, Florian, Jan und Merlin*
+Sponsored by *Random Lerngruppe: Anton, Florian, Jan und Merlin*
 
 
 **Regeln**
@@ -26,3 +26,7 @@ Jeder Spieler platziert nacheinander einen Stein auf dem Spielfeld. Es kann nur 
 - Fehlerkontrolle das keine Falscheingaben möglich sind (*es ist trivial dies zu erwähnen*)
 
 *DISCLAIMER*: Da keine Vorbereitung für dieses Projekt stattgefunden hat, bzw keine Planung oder Gedanken, sondern einfach drauf los geschrieben wurde (*ja ja ja ... ist schlecht ...*), ist dieses Projekt geringfügig verwirrend oder auch unnötig verkompliziert ... Sie wurden gewarnt :) Es gibt auch viele kleine Käfer :/
+
+*Edit*
+Es wurden und werden weitere/er, oft redundante/er, Funktionen/Code hinzugefügt, um neu gelerntes zu üben und praktisch anzuwenden.
+Wir werden sehen wie schlimm es wird ... 
