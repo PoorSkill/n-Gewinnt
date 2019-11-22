@@ -25,7 +25,9 @@ public enum Strings {
 	WANNA_CHANGE_RULES("Wollen sie Regeln aendern?(y/n)"),
 	CHOOSE_COLOR("Wahele eine Farbe aus!\n(b)lau,(r)ot,(g)ruen,(o)range"), NOT_FREE("Ihre Auswahl ist nicht frei!"),
 	SUCCESSFULLY_PICKED("Erfolgfreich ausgewahlt: "), PLAYER_GOT_POINTS(" hat Punkte erzielt: "),
-	NUMBER_NEEDS_TO_BE_HIGHER("Die Zahl muss groesser sein!");
+	NUMBER_NEEDS_TO_BE_HIGHER("Die Zahl muss groesser sein!"),
+	EXCEPTION_NUMBER_OUT_OF_RANGE("Die eingegebene Zahl ist nicht in der range der gewollten Eingabe"),
+	EXCEPTION_UNKNOWN_INPUT("Unbekannte/Falsche Eingabe");
 	String content;
 
 	static String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" }; // Array fuer

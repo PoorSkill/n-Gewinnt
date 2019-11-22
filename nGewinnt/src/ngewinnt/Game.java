@@ -24,7 +24,11 @@ public class Game {
 		Scanner sc = new Scanner(System.in);
 		Game game = new Game();
 		do {
-			game.query(sc);
+			try {
+				game.query(sc);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} while (game.yesNoQuestion(sc, Strings.RUN_CHECK_QUESTION));
 		sc.close();
 		/*
@@ -36,8 +40,9 @@ public class Game {
 	 * Abfrage/Ablauf des Spiels/Haupt-Output in die Konsole
 	 * 
 	 * @param sc
+	 * @throws Exception
 	 */
-	void query(Scanner sc) {
+	void query(Scanner sc) throws Exception {
 		changeRules(sc);
 		// TODO: eine schoene Uebung zu Scanner und Kontruktoren
 		emptyLines(defaultEmptyLines);
@@ -75,8 +80,9 @@ public class Game {
 	 * @param player1
 	 * @param player2
 	 * @param sc
+	 * @throws Exception
 	 */
-	void play(Player player1, Player player2, Scanner sc) {
+	void play(Player player1, Player player2, Scanner sc) throws Exception {
 		// TODO: einfacher aufruf der Methoden der Klasse Player
 		while (player1.won == false || player2.won == false || player1.maxPlays == false || player2.maxPlays == false) {
 			player1.printOwnField();
@@ -135,28 +141,7 @@ public class Game {
 		}
 	}
 
-	/**
-	 * Wenn input nicht int, ueberprueft ob input String mit char der Koordinate,
-	 * umwandeln der Koordinaten in zahlen fuer das Spielfeld
-	 * 
-	 * @param input
-	 * @return
-	 */
-	static int inputAmountToCordInt(Scanner input) {
-		while (true) {
-			try {
-				return input.nextInt();
-			} catch (java.util.InputMismatchException e) {
-				String string2Int = input.nextLine().toLowerCase();
-				if (string2Int.matches("[a-z]")) {
-					char firstLetterOfString = string2Int.charAt(0);
-					int cordOfChar = (int) firstLetterOfString - 97 + 1;
-					return cordOfChar;
-				}
-				System.out.println("Wrong data type, try again!");
-			}
-		}
-	}
+
 
 	/**
 	 * setter von points4win
@@ -165,57 +150,69 @@ public class Game {
 	 * ihre legalitaet
 	 * 
 	 * @param sc
+	 * @throws Exception
 	 * 
 	 */
-	private void changePoints4Win(Scanner sc) {
+	private void changePoints4Win(Scanner sc) throws Exception {
 		emptyLines(defaultEmptyLines);
 		System.out.println(Strings.HOW_MANY_POINTS.content);
-		int input = inputAmountInt(sc);
-		if (input > Gamefield.fieldMax) {
-			System.out.println(Strings.NUMBER_CANT_BE_HIGHER_THAN_GAMEFIELD_SIZE.content);
-			System.out.println(Strings.TRY_AGAIN.content);
-			changePoints4Win(sc);
-		} else if (input <= 1) {
-			System.out.println(Strings.NUMBER_NEEDS_TO_BE_HIGHER.content);
+		try {
+			int input = inputAmountInt(sc);
+			if (input > Gamefield.fieldMax) {
+				System.out.println(Strings.NUMBER_CANT_BE_HIGHER_THAN_GAMEFIELD_SIZE.content);
+				throw new NumberOutOfRange();
+			} else if (input <= 1) {
+				System.out.println(Strings.NUMBER_NEEDS_TO_BE_HIGHER.content);
+				throw new NumberOutOfRange();
+			}
+			Game.points4win = input;
+		} catch (NumberOutOfRange e) {
 			System.out.println(Strings.TRY_AGAIN.content);
 			changePoints4Win(sc);
 		}
-		Game.points4win = input;
+
 	}
 
 	/**
 	 * Scanner Abfrage und Auswahl der gewuenschten Regeln TODO
 	 * 
 	 * @param sc
+	 * @throws Exception
 	 */
-	private void changeRules(Scanner sc) {
+	private void changeRules(Scanner sc) throws Exception {
 		emptyLines(defaultEmptyLines);
 		if (yesNoQuestion(sc, Strings.WANNA_CHANGE_RULES)) {
 			System.out.println(Strings.CHANGE_RULES_START.content);
-			String input = sc.next().toLowerCase();
-			switch (input) {
-			case "1": // Punktzahl aendern
-				System.out.println(Strings.YOU_PICKED.content);
-				changePoints4Win(sc);
-				changeRules(sc);
-				break;
-			case "2": // Spieleranzahl aendern
-				System.out.println(Strings.YOU_PICKED.content);
-				// TODO: wenn langeweile, mehr wie einen Spieler hinzufuegen
-				changeRules(sc);
-				break;
-			case "3": // Sprache aendern
-				System.out.println(Strings.YOU_PICKED.content);
-				// TODO: wenn langeweile, mehr wie einen Sprache hinzufuegen
-				changeRules(sc);
-				break;
-			case "e": // verlassen
-				System.out.println(Strings.YOU_PICKED.content);
-				break;
-			default:
+			try {
+				String input = sc.next().toLowerCase();
+				switch (input) {
+				case "1": // Punktzahl aendern
+					System.out.println(Strings.YOU_PICKED.content);
+					changePoints4Win(sc);
+					changeRules(sc);
+					break;
+				case "2": // Spieleranzahl aendern
+					System.out.println(Strings.YOU_PICKED.content);
+					// TODO: wenn langeweile, mehr wie einen Spieler hinzufuegen
+					changeRules(sc);
+					break;
+				case "3": // Sprache aendern
+					System.out.println(Strings.YOU_PICKED.content);
+					// TODO: wenn langeweile, mehr wie einen Sprache hinzufuegen
+					changeRules(sc);
+					break;
+				case "e": // verlassen
+					System.out.println(Strings.YOU_PICKED.content);
+					break;
+				default:
+					throw new UnknownInput();
+				}
+
+			} catch (UnknownInput e) {
 				System.out.println(Strings.UNKOWN_INPUT.content + "\n" + Strings.TRY_AGAIN.content);
 				changeRules(sc);
 			}
+
 		}
 	}
 

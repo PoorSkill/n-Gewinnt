@@ -176,8 +176,9 @@ public class Player {
 	 * @param sc
 	 * @param player2
 	 * @return true, wenn gewonnen
+	 * @throws Exception
 	 */
-	boolean setStone(Scanner sc, Player player2) {
+	boolean setStone(Scanner sc, Player player2) throws Exception {
 		if (this.plays >= Game.maxAmountOfPlays) {
 			System.out.println("Draw");
 			this.maxPlays = true;
@@ -228,7 +229,7 @@ public class Player {
 	}
 
 	int checkIntInRangeOfCord(Scanner sc, int max) {
-		int input = Game.inputAmountToCordInt(sc);
+		int input = Gamefield.inputAmountToCordInt(sc);
 		if (input > max || input <= 0) {
 			System.out.println(Strings.NOT_A_COORDINATE.content);
 			return checkIntInRangeOfCord(sc, max);
@@ -250,13 +251,12 @@ public class Player {
 			} catch (java.util.InputMismatchException e) {
 				System.out.println("Wrong data type, try again!");
 				input.nextLine();
-			} /*
-				 * catch (java.lang.ArrayIndexOutOfBoundsException c) {
-				 * System.out.println(Strings.NOT_A_COORDINATE.content); input.hasNextLine(); //
-				 * inputAmountInt(input, Gamefield.fieldMax);
-				 * 
-				 * }
-				 */
+			} catch (java.lang.ArrayIndexOutOfBoundsException c) {
+				System.out.println(Strings.NOT_A_COORDINATE.content);
+				inputAmountInt(input, Gamefield.fieldMax);
+
+			}
+
 		}
 	}
 

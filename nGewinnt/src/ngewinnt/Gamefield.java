@@ -1,5 +1,7 @@
 package ngewinnt;
 
+import java.util.Scanner;
+
 /**
  * Spielfeld
  * 
@@ -38,15 +40,20 @@ public class Gamefield {
 	 * @param stone
 	 * @return
 	 */
-	boolean checkLegalStone(Stone stone, Player player) {
-		for (int i = fieldMax - 1; i >= 0; --i) {
-			if (this.field[stone.xPos][i] == '-') {
-				registerStone(stone, i, player);
-				return true;
+	boolean checkLegalStone(Stone stone, Player player) throws Exception {
+		try {
+			for (int i = fieldMax - 1; i >= 0; --i) {
+				if (this.field[stone.xPos][i] == '-') {
+					registerStone(stone, i, player);
+					return true;
+				}
 			}
+			throw new IllegalStone();
+		} catch (IllegalStone e) {
+			System.out.println("Besetzt!");
 		}
-		System.out.println("Besetzt!");
 		return false;
+
 	}
 
 	/**
@@ -60,6 +67,7 @@ public class Gamefield {
 		this.field[stone.xPos][yPos] = stone.color.shortTerm;
 		++player.plays;
 		System.out.println("Stein korrekt gesetzt");
+		Game.emptyLines(defaultEmptyLines * 10);
 		if (checkWin(stone.xPos, yPos, player)) {
 			System.out.println("WIR HABEN EINEN GEWINNER\nSpieler " + player.name + " gewinnt!");
 			return true;
@@ -122,6 +130,29 @@ public class Gamefield {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Wenn input nicht int, ueberprueft ob input String mit char der Koordinate,
+	 * umwandeln der Koordinaten in zahlen fuer das Spielfeld
+	 * 
+	 * @param input
+	 * @return
+	 */
+	static int inputAmountToCordInt(Scanner input) {
+		while (true) {
+			try {
+				return input.nextInt();
+			} catch (java.util.InputMismatchException e) {
+				String string2Int = input.nextLine().toLowerCase();
+				if (string2Int.matches("[a-z]")) {
+					char firstLetterOfString = string2Int.charAt(0);
+					int cordOfChar = (int) firstLetterOfString - 97 + 1;
+					return cordOfChar;
+				}
+				System.out.println("Wrong data type, try again!");
+			}
+		}
 	}
 
 }
