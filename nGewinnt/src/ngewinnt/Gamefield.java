@@ -2,6 +2,8 @@ package ngewinnt;
 
 import java.util.Scanner;
 
+import ngewinnt.exceptions.IllegalStone;
+
 /**
  * Spielfeld
  * 

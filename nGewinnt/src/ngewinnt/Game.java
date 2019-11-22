@@ -2,6 +2,9 @@ package ngewinnt;
 
 import java.util.Scanner;
 
+import ngewinnt.exceptions.NumberOutOfRange;
+import ngewinnt.exceptions.UnknownInput;
+
 /**
  * Spiel
  * 

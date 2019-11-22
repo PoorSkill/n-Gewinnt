@@ -1,7 +1,9 @@
 /**
  * 
  */
-package ngewinnt;
+package ngewinnt.exceptions;
+
+import ngewinnt.Strings;
 
 /**
  * @author Poor
@@ -17,7 +19,7 @@ public class NumberOutOfRange extends Exception {
 	/*
 	 * Standart Konstruktor
 	 */
-	NumberOutOfRange() {
+	public NumberOutOfRange() {
 	}
 
 	NumberOutOfRange(String message) {

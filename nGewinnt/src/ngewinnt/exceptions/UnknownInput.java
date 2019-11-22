@@ -1,7 +1,9 @@
 /**
  * 
  */
-package ngewinnt;
+package ngewinnt.exceptions;
+
+import ngewinnt.Strings;
 
 /**
  * @author Poor
@@ -17,7 +19,7 @@ public class UnknownInput extends Exception {
 	/**
 	 * Standart-Konstruktor
 	 */
-	UnknownInput() {
+	public UnknownInput() {
 	}
 
 	/**

@@ -28,7 +28,7 @@ public enum Strings {
 	NUMBER_NEEDS_TO_BE_HIGHER("Die Zahl muss groesser sein!"),
 	EXCEPTION_NUMBER_OUT_OF_RANGE("Die eingegebene Zahl ist nicht in der range der gewollten Eingabe"),
 	EXCEPTION_UNKNOWN_INPUT("Unbekannte/Falsche Eingabe");
-	String content;
+	public String content;
 
 	static String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" }; // Array fuer
 	// moegliche

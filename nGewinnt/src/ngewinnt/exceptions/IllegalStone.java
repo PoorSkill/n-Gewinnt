@@ -1,23 +1,23 @@
 /**
  * 
  */
-package ngewinnt;
+package ngewinnt.exceptions;
 
 /**
  * @author Poor
  *
  */
-public class IllegalPlay extends Exception {
+public class IllegalStone extends Exception {
 
 	/**
 	 * generated Serial
 	 */
-	private static final long serialVersionUID = -15227958226960118L;
+	private static final long serialVersionUID = 1968194982089281089L;
 
-	/**
+	/*
 	 * Standart Konstruktor
 	 */
-	IllegalPlay() {
+	public IllegalStone() {
 	}
 
 	/**
@@ -25,7 +25,7 @@ public class IllegalPlay extends Exception {
 	 * 
 	 * @param message
 	 */
-	IllegalPlay(String message) {
+	IllegalStone(String message) {
 		super(message);
 	}
 }
