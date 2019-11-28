@@ -1,7 +1,5 @@
 package ngewinnt;
 
-import java.util.Scanner;
-
 import ngewinnt.exceptions.IllegalStoneException;
 
 /**
@@ -24,12 +22,12 @@ public class Gamefield {
 	 * @param own
 	 */
 	Gamefield(boolean own) {
-		this.field = new char[Gamefield.fieldMax][Gamefield.fieldMax];
-		this.stones = new Stone[Gamefield.fieldMax];
-		if (own == true) {
+		setField(new char[Gamefield.fieldMax][Gamefield.fieldMax]);
+		setStones(new Stone[Gamefield.fieldMax]);
+		if (own) {
 			for (int i = 0; i < Gamefield.fieldMax; i++) {
 				for (int j = 0; j < Gamefield.fieldMax; j++) {
-					this.field[i][j] = '-';
+					getField()[i][j] = '-';
 				}
 			}
 		}
@@ -85,7 +83,6 @@ public class Gamefield {
 	 */
 	private boolean checkWin(int xPos, int yPos, Player player) {
 		// yPos ueberpruefung (Senkrecht)
-
 		byte pointsCount;
 		for (int i = field.length - 1; i > 0; --i) {
 			if (i < Game.getPoints4win() - 1) {
@@ -135,33 +132,10 @@ public class Gamefield {
 	}
 
 	/**
-	 * Wenn input nicht int, ueberprueft ob input String mit char der Koordinate,
-	 * umwandeln der Koordinaten in zahlen fuer das Spielfeld
-	 * 
-	 * @param input
-	 * @return
-	 */
-	static int inputAmountToCordInt(Scanner input) {
-		while (true) {
-			try {
-				return input.nextInt();
-			} catch (java.util.InputMismatchException e) {
-				String string2Int = input.nextLine().toLowerCase();
-				if (string2Int.matches("[a-z]")) {
-					char firstLetterOfString = string2Int.charAt(0);
-					int cordOfChar = (int) firstLetterOfString - 97 + 1;
-					return cordOfChar;
-				}
-				System.out.println("Wrong data type, try again!");
-			}
-		}
-	}
-
-	/**
 	 * @return the defaultEmptyLines
 	 */
 	public static int getDefaultEmptyLines() {
-		return defaultEmptyLines;
+		return Gamefield.defaultEmptyLines;
 	}
 
 	/**
@@ -175,7 +149,7 @@ public class Gamefield {
 	 * @return the defaultSpacer
 	 */
 	public static int getDefaultSpacer() {
-		return defaultSpacer;
+		return Gamefield.defaultSpacer;
 	}
 
 	/**
@@ -189,7 +163,7 @@ public class Gamefield {
 	 * @return the fieldMax
 	 */
 	public static int getFieldMax() {
-		return fieldMax;
+		return Gamefield.fieldMax;
 	}
 
 	/**
@@ -203,7 +177,7 @@ public class Gamefield {
 	 * @return the field
 	 */
 	public char[][] getField() {
-		return field;
+		return this.field;
 	}
 
 	/**
@@ -217,7 +191,7 @@ public class Gamefield {
 	 * @return the stones
 	 */
 	public Stone[] getStones() {
-		return stones;
+		return this.stones;
 	}
 
 	/**

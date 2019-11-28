@@ -9,33 +9,28 @@ import java.util.Scanner;
  *
  */
 public class Player {
-	private boolean maxPlays;
 	private int plays; // Anzahl von Spielzuegen
 	private Player opponent; // Gegenspieler des aktuellen Spielers
 	private String name; // Name_Bezeichner des Spielers
 	private Gamefield ownGamefield, opponentsGamefield; // eigene_gegnerische_Spielfeld
 	private Color color; // Farbe der Steine des Spielers
-	private boolean correctPlay, won, bot; // legaler Zug, gewonnen oder bot,
-
-	// kann bei
-	// höheren
-	// sizeGamefield
-	// helfen
+	private boolean maxPlays, correctPlay, won, bot; // Maximale Anzahl von Spielzuegen bereits benutzt? / legaler Zug,
+														// gewonnen oder bot,
 
 	/**
 	 * Standart Konstruktor -> Bot
 	 */
 	Player() {
 		Bot bot = new Bot();
-		this.name = Strings.BOT_NAME.getContent();
-		this.color = bot.checkFreeColor();
-		this.ownGamefield = new Gamefield(true);
-		this.opponentsGamefield = new Gamefield(false);
-		this.correctPlay = true;
-		this.won = false;
-		this.bot = true;
-		this.plays = 0;
-		this.maxPlays = false;
+		setName(Strings.BOT_NAME.getContent());
+		setColor(bot.checkFreeColor());
+		setOwnGamefield(new Gamefield(true));
+		setOpponentsGamefield(new Gamefield(false));
+		setCorrectPlay(true);
+		setWon(false);
+		setBot(true);
+		setPlays(0);
+		setMaxPlays(false);
 	}
 
 	/**
@@ -45,16 +40,16 @@ public class Player {
 	 * @param color
 	 */
 	Player(String name, Color color) {
-		this.name = name;
-		this.color = color;
+		setName(name);
+		setColor(color);
 		color.setColorUsed();
-		this.ownGamefield = new Gamefield(true);
-		this.opponentsGamefield = new Gamefield(false);
-		this.correctPlay = true;
-		this.won = false;
-		this.bot = false;
-		this.plays = 0;
-		this.maxPlays = false;
+		setOwnGamefield(new Gamefield(true));
+		setOpponentsGamefield(new Gamefield(false));
+		setCorrectPlay(true);
+		setWon(false);
+		setBot(false);
+		setPlays(0);
+		setMaxPlays(false);
 	}
 
 	/**
@@ -283,8 +278,16 @@ public class Player {
 		Game.emptyLines(Gamefield.getDefaultEmptyLines());
 	}
 
+	/**
+	 * ueberprueft ob der eingegebene Wert, umgewandelt in ein int, auf dem Bereich
+	 * des Spielfeldes ist
+	 * 
+	 * @param sc
+	 * @param max
+	 * @return
+	 */
 	int checkIntInRangeOfCord(Scanner sc, int max) {
-		int input = Gamefield.inputAmountToCordInt(sc);
+		int input = inputAmountToCordInt(sc);
 		if (input > max || input <= 0) {
 			System.out.println(Strings.NOT_A_COORDINATE.getContent());
 			return checkIntInRangeOfCord(sc, max);
@@ -293,25 +296,25 @@ public class Player {
 	}
 
 	/**
-	 * Methode ueberprueft auf korrekte eingabe (int und im Wertebereich)
+	 * Wenn input nicht int, ueberprueft ob input String mit char der Koordinate,
+	 * umwandeln der Koordinaten in zahlen fuer das Spielfeld
 	 * 
 	 * @param input
 	 * @return
 	 */
-	int inputAmountInt(Scanner input, int max) { // Wenn input nicht int oder zu grosser Wert wiederholt Eingabe
-		// TODO
+	static int inputAmountToCordInt(Scanner input) {
 		while (true) {
 			try {
 				return input.nextInt();
 			} catch (java.util.InputMismatchException e) {
+				String string2Int = input.nextLine().toLowerCase();
+				if (string2Int.matches("[a-z]")) {
+					char firstLetterOfString = string2Int.charAt(0);
+					int cordOfChar = (int) firstLetterOfString - 97 + 1;
+					return cordOfChar;
+				}
 				System.out.println("Wrong data type, try again!");
-				input.nextLine();
-			} catch (java.lang.ArrayIndexOutOfBoundsException c) {
-				System.out.println(Strings.NOT_A_COORDINATE.getContent());
-				inputAmountInt(input, Gamefield.getFieldMax());
-
 			}
-
 		}
 	}
 

@@ -84,7 +84,6 @@ public class Game {
 	 * @throws Exception
 	 */
 	void play(Player player1, Player player2, Scanner sc) throws Exception {
-		// TODO: einfacher aufruf der Methoden der Klasse Player
 		while (!player1.getWon() || !player2.getWon() || !player1.isMaxPlays() || !player2.isMaxPlays()) {
 			player1.printOwnField();
 			player1.setStone(sc, player2);
@@ -94,7 +93,7 @@ public class Game {
 			}
 			player2.printOwnField();
 			player2.setStone(sc, player1);
-			if (player2.getWon() || player2.isMaxPlays() == true) {
+			if (player2.getWon() || player2.isMaxPlays()) {
 				player2.printOwnField();
 				break;
 			}
@@ -232,7 +231,7 @@ public class Game {
 				}
 			}
 			System.out.println(Strings.SUCCESSFULLY_PICKED.getContent() + freeName);
-			for (int i = 0; i <= Strings.getUsedNames().length - 1; ++i) {
+			for (int i = 0; i <= Strings.getUsedNames().length; ++i) {
 				if (freeName.equals("platzhalter0") || freeName.equals("platzhalter1")) {
 					Strings.getUsedNames()[i] = freeName;
 				}
@@ -245,8 +244,7 @@ public class Game {
 	}
 
 	/**
-	 * Faule aber funktionale Abfrage des Namens (nicht wirklich gut) //nicht sehr
-	 * schoen geschrieben => unnoetig kompliziert
+	 * Faule aber funktionale Abfrage des Namens
 	 * 
 	 * @param sc
 	 * @return
@@ -256,11 +254,10 @@ public class Game {
 		System.out.println(Strings.PLEASE_INSERT_NAME.getContent());
 		try {
 			String freeName = sc.next();
-			if (player1 != null) { // nicht sehr schoen geschrieben => unnoetig kompliziert
+			if (player1 != null) {
 				if (freeName.equals(player1.getName()) || freeName.equals("Bot")) {
 					throw new NotFreeException();
 				}
-				// nicht sehr schoen geschrieben => unnoetig kompliziert
 			} else {
 				if (freeName.equals("Bot")) {
 					throw new NotFreeException();
@@ -270,7 +267,7 @@ public class Game {
 			return freeName;
 		} catch (NotFreeException e) {
 			System.out.println(Strings.NOT_FREE.getContent() + "\n" + Strings.TRY_AGAIN.getContent());
-			return chooseName(sc);
+			return chooseName(sc, player1);
 
 		}
 	}
@@ -313,7 +310,7 @@ public class Game {
 	 * @return the defaultEmptyLines
 	 */
 	public static int getDefaultEmptyLines() {
-		return defaultEmptyLines;
+		return Game.defaultEmptyLines;
 	}
 
 	/**
@@ -327,7 +324,7 @@ public class Game {
 	 * @return the maxAmountOfPlays
 	 */
 	public static int getMaxAmountOfPlays() {
-		return maxAmountOfPlays;
+		return Game.maxAmountOfPlays;
 	}
 
 	/**
@@ -341,7 +338,7 @@ public class Game {
 	 * @return the points4win
 	 */
 	public static int getPoints4win() {
-		return points4win;
+		return Game.points4win;
 	}
 
 	/**
@@ -355,7 +352,7 @@ public class Game {
 	 * @return the player
 	 */
 	public Player[] getPlayer() {
-		return player;
+		return this.player;
 	}
 
 	/**

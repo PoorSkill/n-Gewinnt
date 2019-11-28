@@ -16,16 +16,17 @@ public enum Color {
 	private String name; // name der Farbe
 	private boolean free; // true ist frei
 	private char shortTerm; // Abkuerzung der Farbe
-	
+
 	/**
 	 * Konstruktor
 	 * 
 	 * @param name
 	 */
 	Color(String name, boolean availability, char shortTerm) {
-		this.name = name;
-		this.free = availability;
-		this.shortTerm = shortTerm;
+		setName(name);
+		setFree(availability);
+		setShortTerm(shortTerm);
+
 	}
 
 	/**
@@ -95,8 +96,8 @@ public enum Color {
 	 * @param newshortTerm
 	 */
 	@SuppressWarnings("unused")
-	private void setShortTerm(boolean newShortTerm) {
-		this.free = newShortTerm;
+	private void setShortTerm(char newShortTerm) {
+		this.shortTerm = newShortTerm;
 	}
 
 	/**

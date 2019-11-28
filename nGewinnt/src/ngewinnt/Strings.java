@@ -96,9 +96,9 @@ public enum Strings {
 	 * @param newName
 	 */
 	public static void addUsedName(String newName) {
-		usedNamesList.add("Bot");
-		usedNamesList.add("Guy");
-		usedNamesList.add(newName);
+		Strings.usedNamesList.add("Bot");
+		Strings.usedNamesList.add("Guy");
+		Strings.usedNamesList.add(newName);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public enum Strings {
 	 * @param removeName
 	 */
 	public void removeUsedName(String removeName) {
-		usedNamesList.remove(removeName);
+		Strings.usedNamesList.remove(removeName);
 	}
 
 	/**
@@ -142,7 +142,7 @@ public enum Strings {
 	 * @return the usedNames
 	 */
 	public static String[] getUsedNames() {
-		return usedNames;
+		return Strings.usedNames;
 	}
 
 	/**
@@ -156,7 +156,7 @@ public enum Strings {
 	 * @return the usedNamesList
 	 */
 	public static ArrayList<String> getUsedNamesList() {
-		return usedNamesList;
+		return Strings.usedNamesList;
 	}
 
 	/**
@@ -170,7 +170,7 @@ public enum Strings {
 	 * @return the xCordsIdentifiers
 	 */
 	public static String[] getxCordsIdentifiers() {
-		return xCordsIdentifiers;
+		return Strings.xCordsIdentifiers;
 	}
 
 	/**

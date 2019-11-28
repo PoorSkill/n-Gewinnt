@@ -3,7 +3,7 @@ package ngewinnt;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Bot fuer Einzelspieler
+ * Bot fuer Einzelspieler TODO
  * 
  * @author Anton Kesy
  *

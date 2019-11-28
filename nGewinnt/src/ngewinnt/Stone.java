@@ -7,8 +7,8 @@ package ngewinnt;
  *
  */
 public class Stone {
-	private int xPos, yPos;
-	private Color color;
+	private int xPos, yPos; // Postitionen des Steines auf dem Spielbrett
+	private Color color; // Farbe des Steines
 
 	/**
 	 * Standart Konstruktor
@@ -24,9 +24,9 @@ public class Stone {
 	 * @param color
 	 */
 	Stone(int xPos, int yPos, Color color) {
-		this.xPos = xPos;
-		this.yPos = yPos;
-		this.color = color;
+		setXPos(xPos);
+		setYPos(yPos);
+		setColor(color);
 	}
 
 	/**
@@ -37,9 +37,9 @@ public class Stone {
 	 * @param color
 	 */
 	Stone(int xPos, Color color) {
-		this.xPos = xPos;
-		this.yPos = 0;
-		this.color = color;
+		setXPos(xPos);
+		setYPos(0);
+		setColor(color);
 	}
 
 	/**
@@ -56,8 +56,7 @@ public class Stone {
 	 * 
 	 * @param newXPos
 	 */
-	@SuppressWarnings("unused")
-	private void setXPos(int newXPos) {
+	void setXPos(int newXPos) {
 		this.xPos = newXPos;
 	}
 
@@ -75,8 +74,8 @@ public class Stone {
 	 * 
 	 * @param newYPos
 	 */
-	@SuppressWarnings("unused")
-	private void setYPos(int newYPos) {
+
+	void setYPos(int newYPos) {
 		this.yPos = newYPos;
 	}
 
@@ -94,8 +93,7 @@ public class Stone {
 	 * 
 	 * @param newColor
 	 */
-	@SuppressWarnings("unused")
-	private void setColor(Color newColor) {
+	void setColor(Color newColor) {
 		this.color = newColor;
 	}
 
