@@ -28,23 +28,26 @@ public enum Strings {
 	NUMBER_NEEDS_TO_BE_HIGHER("Die Zahl muss groesser sein!"),
 	EXCEPTION_NUMBER_OUT_OF_RANGE("Die eingegebene Zahl ist nicht in der range der gewollten Eingabe"),
 	EXCEPTION_UNKNOWN_INPUT("Unbekannte/Falsche Eingabe");
-	public String content;
+	private String content;
 
-	static String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" }; // Array fuer
+	private static String[] possibleAnswersOfYes = { "y", "1", "yes", "true", "ja", "weiter", "ye", "ya" }; // Array
+																											// fuer
 	// moegliche
 	// Antworten auf
 	// "Ja"
-	static String[] possibleAnswersOfNo = { "n", "0", "no", "false", "nein", "stop", "nah", "na" }; // Array fuer
+	private static String[] possibleAnswersOfNo = { "n", "0", "no", "false", "nein", "stop", "nah", "na" }; // Array
+																											// fuer
 	// moegliche
 	// Antworten auf
 	// "Nein"
-	static String[] usedNames = { "Bot", "Guy", "platzhalter0", "platzhalter1" }; // Array aus besetzten Namen fuer den
-																					// Spieler TODO: in Liste umwandeln
+	private static String[] usedNames = { "Bot", "Guy", "platzhalter0", "platzhalter1" }; // Array aus besetzten Namen
+																							// fuer den
+	// Spieler TODO: in Liste umwandeln
 
-	static ArrayList<String> usedNamesList = new ArrayList<>(); // Namelist der nicht freien Spielernamen
+	private static ArrayList<String> usedNamesList = new ArrayList<>(); // Namelist der nicht freien Spielernamen
 
-	static String[] xCordsIdentifiers = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
-			"P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }; // xKoordinaten Identifizierer
+	private static String[] xCordsIdentifiers = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
+			"O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }; // xKoordinaten Identifizierer
 
 	/**
 	 * Konstruktor
@@ -60,7 +63,7 @@ public enum Strings {
 	 * 
 	 * @return content des Objektes
 	 */
-	String getContent() {
+	public String getContent() {
 		return this.content;
 	}
 
@@ -105,6 +108,76 @@ public enum Strings {
 	 */
 	public void removeUsedName(String removeName) {
 		usedNamesList.remove(removeName);
+	}
+
+	/**
+	 * @return the possibleAnswersOfYes
+	 */
+	public static String[] getPossibleAnswersOfYes() {
+		return possibleAnswersOfYes;
+	}
+
+	/**
+	 * @param possibleAnswersOfYes the possibleAnswersOfYes to set
+	 */
+	public static void setPossibleAnswersOfYes(String[] possibleAnswersOfYes) {
+		Strings.possibleAnswersOfYes = possibleAnswersOfYes;
+	}
+
+	/**
+	 * @return the possibleAnswersOfNo
+	 */
+	public static String[] getPossibleAnswersOfNo() {
+		return possibleAnswersOfNo;
+	}
+
+	/**
+	 * @param possibleAnswersOfNo the possibleAnswersOfNo to set
+	 */
+	public static void setPossibleAnswersOfNo(String[] possibleAnswersOfNo) {
+		Strings.possibleAnswersOfNo = possibleAnswersOfNo;
+	}
+
+	/**
+	 * @return the usedNames
+	 */
+	public static String[] getUsedNames() {
+		return usedNames;
+	}
+
+	/**
+	 * @param usedNames the usedNames to set
+	 */
+	public static void setUsedNames(String[] usedNames) {
+		Strings.usedNames = usedNames;
+	}
+
+	/**
+	 * @return the usedNamesList
+	 */
+	public static ArrayList<String> getUsedNamesList() {
+		return usedNamesList;
+	}
+
+	/**
+	 * @param usedNamesList the usedNamesList to set
+	 */
+	public static void setUsedNamesList(ArrayList<String> usedNamesList) {
+		Strings.usedNamesList = usedNamesList;
+	}
+
+	/**
+	 * @return the xCordsIdentifiers
+	 */
+	public static String[] getxCordsIdentifiers() {
+		return xCordsIdentifiers;
+	}
+
+	/**
+	 * @param xCordsIdentifiers the xCordsIdentifiers to set
+	 */
+	public static void setxCordsIdentifiers(String[] xCordsIdentifiers) {
+		Strings.xCordsIdentifiers = xCordsIdentifiers;
 	}
 
 }

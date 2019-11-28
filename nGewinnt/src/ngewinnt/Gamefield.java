@@ -2,7 +2,7 @@ package ngewinnt;
 
 import java.util.Scanner;
 
-import ngewinnt.exceptions.IllegalStone;
+import ngewinnt.exceptions.IllegalStoneException;
 
 /**
  * Spielfeld
@@ -11,11 +11,11 @@ import ngewinnt.exceptions.IllegalStone;
  *
  */
 public class Gamefield {
-	static int defaultEmptyLines = 1; // Standart Abstand fuer Ausgabe des Spieles in der Konsole
-	static int defaultSpacer = 1; // Standart Abstand fuer Ausgabe des Spieles in der Konsole
-	static int fieldMax = 10; // Groesse des Spielfeldes
-	char field[][]; // Das Spielfeld
-	Stone[] stones; // Die Steine des Spieles
+	private static int defaultEmptyLines = 1; // Standart Abstand fuer Ausgabe des Spieles in der Konsole
+	private static int defaultSpacer = 1; // Standart Abstand fuer Ausgabe des Spieles in der Konsole
+	private static int fieldMax = 10; // Groesse des Spielfeldes
+	private char field[][]; // Das Spielfeld
+	private Stone[] stones; // Die Steine des Spieles
 
 	/**
 	 * Konstruktor fragt nach, welches Spielfeld gezeichnet werden soll und erstellt
@@ -45,13 +45,13 @@ public class Gamefield {
 	boolean checkLegalStone(Stone stone, Player player) throws Exception {
 		try {
 			for (int i = fieldMax - 1; i >= 0; --i) {
-				if (this.field[stone.xPos][i] == '-') {
+				if (this.field[stone.getXPos()][i] == '-') {
 					registerStone(stone, i, player);
 					return true;
 				}
 			}
-			throw new IllegalStone();
-		} catch (IllegalStone e) {
+			throw new IllegalStoneException();
+		} catch (IllegalStoneException e) {
 			System.out.println("Besetzt!");
 		}
 		return false;
@@ -66,12 +66,12 @@ public class Gamefield {
 	 *
 	 */
 	private boolean registerStone(Stone stone, int yPos, Player player) {
-		this.field[stone.xPos][yPos] = stone.color.shortTerm;
-		++player.plays;
+		this.field[stone.getXPos()][yPos] = stone.getColor().getShortTerm();
+		player.setPlays(player.getPlays() + 1);
 		System.out.println("Stein korrekt gesetzt");
 		Game.emptyLines(defaultEmptyLines * 10);
-		if (checkWin(stone.xPos, yPos, player)) {
-			System.out.println("WIR HABEN EINEN GEWINNER\nSpieler " + player.name + " gewinnt!");
+		if (checkWin(stone.getXPos(), yPos, player)) {
+			System.out.println("WIR HABEN EINEN GEWINNER\nSpieler " + player.getName() + " gewinnt!");
 			return true;
 		}
 		return false;
@@ -88,19 +88,19 @@ public class Gamefield {
 
 		byte pointsCount;
 		for (int i = field.length - 1; i > 0; --i) {
-			if (i < Game.points4win - 1) {
+			if (i < Game.getPoints4win() - 1) {
 				break;
 			}
 			pointsCount = 0;
-			for (int j = 0; j < Game.points4win; ++j) {
+			for (int j = 0; j < Game.getPoints4win(); ++j) {
 				if (field[xPos][i] != '-' && field[xPos][i] == field[xPos][i - j]) {
 					++pointsCount;
-					if (pointsCount >= Game.points4win) {
-						System.out.println(player.name + Strings.PLAYER_GOT_POINTS.content + pointsCount);
-						player.won = true;
+					if (pointsCount >= Game.getPoints4win()) {
+						System.out.println(player.getName() + Strings.PLAYER_GOT_POINTS.getContent() + pointsCount);
+						player.setWon(true);
 						char posCharXPos0 = (char) ('A' - 1 + (i - Gamefield.fieldMax) * (-1));
 						System.out.println(posCharXPos0 + "-" + (Gamefield.fieldMax - i) + " bis " + posCharXPos0 + "-"
-								+ (Gamefield.fieldMax - i + Game.points4win - 1));
+								+ (Gamefield.fieldMax - i + Game.getPoints4win() - 1));
 						return true;
 					}
 				} else {
@@ -111,17 +111,17 @@ public class Gamefield {
 		// xPos ueberpruefung (Horizontal)
 		for (int i = field.length - 1; i > 0; --i) {
 			pointsCount = 0;
-			if (i < Game.points4win - 1) {
+			if (i < Game.getPoints4win() - 1) {
 				break;
 			}
-			for (int j = 0; j < Game.points4win; ++j) {
+			for (int j = 0; j < Game.getPoints4win(); ++j) {
 				if (field[i][yPos] != '-' && field[i][yPos] == field[i - j][yPos]) {
 					++pointsCount;
-					if (pointsCount >= Game.points4win) {
-						System.out.println(player.name + Strings.PLAYER_GOT_POINTS.content + pointsCount);
-						player.won = true;
+					if (pointsCount >= Game.getPoints4win()) {
+						System.out.println(player.getName() + Strings.PLAYER_GOT_POINTS.getContent() + pointsCount);
+						player.setWon(true);
 						char posCharXPos0 = (char) ('A' - 1 + (j) - 2);
-						char posCharXPos1 = (char) ('A' - 1 + ((j + Game.points4win)) - 2);
+						char posCharXPos1 = (char) ('A' - 1 + ((j + Game.getPoints4win())) - 2);
 						System.out.println(posCharXPos0 + "-" + (yPos - Gamefield.fieldMax) * (-1) + " bis "
 								+ posCharXPos1 + "-" + (yPos - Gamefield.fieldMax) * (-1));
 						return true;
@@ -155,6 +155,76 @@ public class Gamefield {
 				System.out.println("Wrong data type, try again!");
 			}
 		}
+	}
+
+	/**
+	 * @return the defaultEmptyLines
+	 */
+	public static int getDefaultEmptyLines() {
+		return defaultEmptyLines;
+	}
+
+	/**
+	 * @param defaultEmptyLines the defaultEmptyLines to set
+	 */
+	public static void setDefaultEmptyLines(int defaultEmptyLines) {
+		Gamefield.defaultEmptyLines = defaultEmptyLines;
+	}
+
+	/**
+	 * @return the defaultSpacer
+	 */
+	public static int getDefaultSpacer() {
+		return defaultSpacer;
+	}
+
+	/**
+	 * @param defaultSpacer the defaultSpacer to set
+	 */
+	public static void setDefaultSpacer(int defaultSpacer) {
+		Gamefield.defaultSpacer = defaultSpacer;
+	}
+
+	/**
+	 * @return the fieldMax
+	 */
+	public static int getFieldMax() {
+		return fieldMax;
+	}
+
+	/**
+	 * @param fieldMax the fieldMax to set
+	 */
+	public static void setFieldMax(int fieldMax) {
+		Gamefield.fieldMax = fieldMax;
+	}
+
+	/**
+	 * @return the field
+	 */
+	public char[][] getField() {
+		return field;
+	}
+
+	/**
+	 * @param field the field to set
+	 */
+	public void setField(char[][] field) {
+		this.field = field;
+	}
+
+	/**
+	 * @return the stones
+	 */
+	public Stone[] getStones() {
+		return stones;
+	}
+
+	/**
+	 * @param stones the stones to set
+	 */
+	public void setStones(Stone[] stones) {
+		this.stones = stones;
 	}
 
 }

@@ -9,8 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  */
 public class Bot {
-	boolean active;
-	Player player;
+	private boolean active;
 
 	/**
 	 * Standart Konstruktor
@@ -24,11 +23,10 @@ public class Bot {
 	 * @return freie Farbe
 	 */
 	Color checkFreeColor() {
-		// TODO: ez -> funktioniert noch nicht!!!
 		Color freeColor;
-		if (Color.BLUE.free) {
+		if (Color.BLUE.getFree()) {
 			freeColor = Color.BLUE;
-		} else if (Color.RED.free) {
+		} else if (Color.RED.getFree()) {
 			freeColor = Color.RED;
 		} else {
 			freeColor = Color.GREEN;
@@ -62,8 +60,8 @@ public class Bot {
 	 */
 	static int randomXPos() {
 		int min = 0;
-		int randomIntInRange = ThreadLocalRandom.current().nextInt(min, Gamefield.fieldMax + 1);
-		if (randomIntInRange > Gamefield.fieldMax || randomIntInRange <= 0) {
+		int randomIntInRange = ThreadLocalRandom.current().nextInt(min, Gamefield.getFieldMax() + 1);
+		if (randomIntInRange > Gamefield.getFieldMax() || randomIntInRange <= 0) {
 			return randomXPos();
 		} else {
 			return randomIntInRange;

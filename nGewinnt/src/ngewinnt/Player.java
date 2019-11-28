@@ -9,13 +9,13 @@ import java.util.Scanner;
  *
  */
 public class Player {
-	boolean maxPlays;
-	int plays; // Anzahl von Spielzuegen
-	Player opponent; // Gegenspieler des aktuellen Spielers
-	String name; // Name_Bezeichner des Spielers
-	Gamefield ownGamefield, opponentsGamefield; // eigene_gegnerische_Spielfeld
-	Color color; // Farbe der Steine des Spielers
-	boolean correctPlay, won, bot; // legaler Zug, gewonnen oder bot,
+	private boolean maxPlays;
+	private int plays; // Anzahl von Spielzuegen
+	private Player opponent; // Gegenspieler des aktuellen Spielers
+	private String name; // Name_Bezeichner des Spielers
+	private Gamefield ownGamefield, opponentsGamefield; // eigene_gegnerische_Spielfeld
+	private Color color; // Farbe der Steine des Spielers
+	private boolean correctPlay, won, bot; // legaler Zug, gewonnen oder bot,
 
 	// kann bei
 	// höheren
@@ -27,7 +27,7 @@ public class Player {
 	 */
 	Player() {
 		Bot bot = new Bot();
-		this.name = Strings.BOT_NAME.content;
+		this.name = Strings.BOT_NAME.getContent();
 		this.color = bot.checkFreeColor();
 		this.ownGamefield = new Gamefield(true);
 		this.opponentsGamefield = new Gamefield(false);
@@ -146,9 +146,64 @@ public class Player {
 	 * 
 	 * @param newWon
 	 */
-	@SuppressWarnings("unused")
-	private void setWon(boolean newWon) {
+	void setWon(boolean newWon) {
 		this.won = newWon;
+	}
+
+	/**
+	 * @return the maxPlays
+	 */
+	public boolean isMaxPlays() {
+		return maxPlays;
+	}
+
+	/**
+	 * @param maxPlays the maxPlays to set
+	 */
+	public void setMaxPlays(boolean maxPlays) {
+		this.maxPlays = maxPlays;
+	}
+
+	/**
+	 * @return the plays
+	 */
+	public int getPlays() {
+		return plays;
+	}
+
+	/**
+	 * @param plays the plays to set
+	 */
+	public void setPlays(int plays) {
+		this.plays = plays;
+	}
+
+	/**
+	 * @return the ownGamefield
+	 */
+	public Gamefield getOwnGamefield() {
+		return ownGamefield;
+	}
+
+	/**
+	 * @param ownGamefield the ownGamefield to set
+	 */
+	public void setOwnGamefield(Gamefield ownGamefield) {
+		this.ownGamefield = ownGamefield;
+	}
+
+	/**
+	 * @return the opponentsGamefield
+	 */
+	public Gamefield getOpponentsGamefield() {
+		return opponentsGamefield;
+	}
+
+	/**
+	 * @param opponentsGamefield the opponentsGamefield to set
+	 */
+	public void setOpponentsGamefield(Gamefield opponentsGamefield) {
+		this.opponentsGamefield = opponentsGamefield;
 	}
 
 	/**
@@ -179,7 +234,7 @@ public class Player {
 	 * @throws Exception
 	 */
 	boolean setStone(Scanner sc, Player player2) throws Exception {
-		if (this.plays >= Game.maxAmountOfPlays) {
+		if (this.plays >= Game.getMaxAmountOfPlays()) {
 			System.out.println("Draw");
 			this.maxPlays = true;
 			return false;
@@ -191,8 +246,8 @@ public class Player {
 				return setStone(sc, player2);
 			}
 		}
-		System.out.println(Strings.NEXT_MOVE.content);
-		Stone stone = new Stone(checkIntInRangeOfCord(sc, Gamefield.fieldMax) - 1, color);
+		System.out.println(Strings.NEXT_MOVE.getContent());
+		Stone stone = new Stone(checkIntInRangeOfCord(sc, Gamefield.getFieldMax()) - 1, color);
 		if (ownGamefield.checkLegalStone(stone, this)) {
 			return true;
 		} else {
@@ -207,31 +262,31 @@ public class Player {
 	 */
 	public void printOwnField() {
 		this.ownGamefield = opponent.ownGamefield; // TODO: besser Version!
-		System.out.println(Strings.PLAYER_NAME_INTRO.content + this.name + ":");
-		Game.emptyLines(Gamefield.defaultEmptyLines * 3);
-		Game.spacer(Gamefield.defaultSpacer);
-		for (int l = 0; l <= Gamefield.fieldMax - 1; ++l) {
-			System.out.print(Strings.xCordsIdentifiers[l]);
-			Game.spacer(Gamefield.defaultSpacer);
+		System.out.println(Strings.PLAYER_NAME_INTRO.getContent() + this.name + ":");
+		Game.emptyLines(Gamefield.getDefaultEmptyLines() * 3);
+		Game.spacer(Gamefield.getDefaultSpacer());
+		for (int l = 0; l <= Gamefield.getFieldMax() - 1; ++l) {
+			System.out.print(Strings.getxCordsIdentifiers()[l]);
+			Game.spacer(Gamefield.getDefaultSpacer());
 		}
-		Game.emptyLines(Gamefield.defaultEmptyLines * 3);
-		for (int i = 0; i < Gamefield.fieldMax; ++i) {
-			System.out.print((i - Gamefield.fieldMax) * (-1));
-			Game.spacer(Gamefield.defaultSpacer);
-			for (int j = 0; j < Gamefield.fieldMax; ++j) {
+		Game.emptyLines(Gamefield.getDefaultEmptyLines() * 3);
+		for (int i = 0; i < Gamefield.getFieldMax(); ++i) {
+			System.out.print((i - Gamefield.getFieldMax()) * (-1));
+			Game.spacer(Gamefield.getDefaultSpacer());
+			for (int j = 0; j < Gamefield.getFieldMax(); ++j) {
 
-				System.out.print(this.ownGamefield.field[j][i]);
-				Game.spacer(Gamefield.defaultSpacer);
+				System.out.print(this.ownGamefield.getField()[j][i]);
+				Game.spacer(Gamefield.getDefaultSpacer());
 			}
-			Game.emptyLines(Gamefield.defaultEmptyLines);
+			Game.emptyLines(Gamefield.getDefaultEmptyLines());
 		}
-		Game.emptyLines(Gamefield.defaultEmptyLines);
+		Game.emptyLines(Gamefield.getDefaultEmptyLines());
 	}
 
 	int checkIntInRangeOfCord(Scanner sc, int max) {
 		int input = Gamefield.inputAmountToCordInt(sc);
 		if (input > max || input <= 0) {
-			System.out.println(Strings.NOT_A_COORDINATE.content);
+			System.out.println(Strings.NOT_A_COORDINATE.getContent());
 			return checkIntInRangeOfCord(sc, max);
 		}
 		return input;
@@ -252,8 +307,8 @@ public class Player {
 				System.out.println("Wrong data type, try again!");
 				input.nextLine();
 			} catch (java.lang.ArrayIndexOutOfBoundsException c) {
-				System.out.println(Strings.NOT_A_COORDINATE.content);
-				inputAmountInt(input, Gamefield.fieldMax);
+				System.out.println(Strings.NOT_A_COORDINATE.getContent());
+				inputAmountInt(input, Gamefield.getFieldMax());
 
 			}
 

@@ -2,8 +2,9 @@ package ngewinnt;
 
 import java.util.Scanner;
 
-import ngewinnt.exceptions.NumberOutOfRange;
-import ngewinnt.exceptions.UnknownInput;
+import ngewinnt.exceptions.NotFreeException;
+import ngewinnt.exceptions.NumberOutOfRangeException;
+import ngewinnt.exceptions.UnknownInputException;
 
 /**
  * Spiel
@@ -12,11 +13,12 @@ import ngewinnt.exceptions.UnknownInput;
  *
  */
 public class Game {
-	static int defaultEmptyLines = 3; // Game Konsolen abstand fuer die Befragung TODO: Einstellungen Klasse?
-	static int maxAmountOfPlays = (Gamefield.fieldMax * Gamefield.fieldMax) / 2; // maximale Anzahl von Zuegen
-	static int points4win = 4; // Punkteanzahl die benoetigt wird, um zu gewinnen
-	Player player[]; // reduntantes Array von den Spielern (speatere Anwedung bei Speicherung der
-						// Spielstaende)
+	private static int defaultEmptyLines = 3; // Game Konsolen abstand fuer die Befragung TODO: Einstellungen Klasse?
+	private static int maxAmountOfPlays = (Gamefield.getFieldMax() * Gamefield.getFieldMax()) / 2; // maximale Anzahl
+																									// von Zuegen
+	private static int points4win = 4; // Punkteanzahl die benoetigt wird, um zu gewinnen
+	private Player player[]; // reduntantes Array von den Spielern (speatere Anwedung bei Speicherung der
+	// Spielstaende)
 
 	/**
 	 * Main startet Scanner und solange runCheck true, läuft das Progamm in Schleife
@@ -34,9 +36,6 @@ public class Game {
 			}
 		} while (game.yesNoQuestion(sc, Strings.RUN_CHECK_QUESTION));
 		sc.close();
-		/*
-		 * redundant, aber moegliche Erweiterung: System.exit(0);
-		 */
 	}
 
 	/**
@@ -55,7 +54,7 @@ public class Game {
 		// TODO: Optimierung (Gamefield copy)
 		player1.setOpponent(player2);
 		player2.setOpponent(player1);
-		// verschieben in play
+		// Startet Spielablauf
 		this.play(player1, player2, sc);
 	}
 
@@ -69,7 +68,6 @@ public class Game {
 		Player player2;
 		if (yesNoQuestion(sc, Strings.SINGLEPLAYER_QUESTION)) {
 			player2 = new Player();
-
 		} else {
 			player2 = new Player(chooseName(sc, player1), Color.chooseColor(sc));
 		}
@@ -87,16 +85,16 @@ public class Game {
 	 */
 	void play(Player player1, Player player2, Scanner sc) throws Exception {
 		// TODO: einfacher aufruf der Methoden der Klasse Player
-		while (player1.won == false || player2.won == false || player1.maxPlays == false || player2.maxPlays == false) {
+		while (!player1.getWon() || !player2.getWon() || !player1.isMaxPlays() || !player2.isMaxPlays()) {
 			player1.printOwnField();
 			player1.setStone(sc, player2);
-			if (player1.won || player1.maxPlays == true) {
+			if (player1.getWon() || player1.isMaxPlays()) {
 				player1.printOwnField();
 				break;
 			}
 			player2.printOwnField();
 			player2.setStone(sc, player1);
-			if (player2.won || player2.maxPlays == true) {
+			if (player2.getWon() || player2.isMaxPlays() == true) {
 				player2.printOwnField();
 				break;
 			}
@@ -144,8 +142,6 @@ public class Game {
 		}
 	}
 
-
-
 	/**
 	 * setter von points4win
 	 * 
@@ -158,19 +154,19 @@ public class Game {
 	 */
 	private void changePoints4Win(Scanner sc) throws Exception {
 		emptyLines(defaultEmptyLines);
-		System.out.println(Strings.HOW_MANY_POINTS.content);
+		System.out.println(Strings.HOW_MANY_POINTS.getContent());
 		try {
 			int input = inputAmountInt(sc);
-			if (input > Gamefield.fieldMax) {
-				System.out.println(Strings.NUMBER_CANT_BE_HIGHER_THAN_GAMEFIELD_SIZE.content);
-				throw new NumberOutOfRange();
+			if (input > Gamefield.getFieldMax()) {
+				System.out.println(Strings.NUMBER_CANT_BE_HIGHER_THAN_GAMEFIELD_SIZE.getContent());
+				throw new NumberOutOfRangeException();
 			} else if (input <= 1) {
-				System.out.println(Strings.NUMBER_NEEDS_TO_BE_HIGHER.content);
-				throw new NumberOutOfRange();
+				System.out.println(Strings.NUMBER_NEEDS_TO_BE_HIGHER.getContent());
+				throw new NumberOutOfRangeException();
 			}
 			Game.points4win = input;
-		} catch (NumberOutOfRange e) {
-			System.out.println(Strings.TRY_AGAIN.content);
+		} catch (NumberOutOfRangeException e) {
+			System.out.println(Strings.TRY_AGAIN.getContent());
 			changePoints4Win(sc);
 		}
 
@@ -185,34 +181,34 @@ public class Game {
 	private void changeRules(Scanner sc) throws Exception {
 		emptyLines(defaultEmptyLines);
 		if (yesNoQuestion(sc, Strings.WANNA_CHANGE_RULES)) {
-			System.out.println(Strings.CHANGE_RULES_START.content);
+			System.out.println(Strings.CHANGE_RULES_START.getContent());
 			try {
 				String input = sc.next().toLowerCase();
 				switch (input) {
 				case "1": // Punktzahl aendern
-					System.out.println(Strings.YOU_PICKED.content);
+					System.out.println(Strings.YOU_PICKED.getContent());
 					changePoints4Win(sc);
 					changeRules(sc);
 					break;
 				case "2": // Spieleranzahl aendern
-					System.out.println(Strings.YOU_PICKED.content);
+					System.out.println(Strings.YOU_PICKED.getContent());
 					// TODO: wenn langeweile, mehr wie einen Spieler hinzufuegen
 					changeRules(sc);
 					break;
 				case "3": // Sprache aendern
-					System.out.println(Strings.YOU_PICKED.content);
+					System.out.println(Strings.YOU_PICKED.getContent());
 					// TODO: wenn langeweile, mehr wie einen Sprache hinzufuegen
 					changeRules(sc);
 					break;
 				case "e": // verlassen
-					System.out.println(Strings.YOU_PICKED.content);
+					System.out.println(Strings.YOU_PICKED.getContent());
 					break;
 				default:
-					throw new UnknownInput();
+					throw new UnknownInputException();
 				}
 
-			} catch (UnknownInput e) {
-				System.out.println(Strings.UNKOWN_INPUT.content + "\n" + Strings.TRY_AGAIN.content);
+			} catch (UnknownInputException e) {
+				System.out.println(Strings.UNKOWN_INPUT.getContent() + "\n" + Strings.TRY_AGAIN.getContent());
 				changeRules(sc);
 			}
 
@@ -227,22 +223,25 @@ public class Game {
 	 */
 	String chooseName(Scanner sc) {
 		emptyLines(defaultEmptyLines);
-		System.out.println(Strings.PLEASE_INSERT_NAME.content);
-		String freeName = sc.next();
-		for (int i = 0; i <= Strings.usedNames.length - 1; ++i) {
-			if (freeName.equals(Strings.usedNames[i])) {
-				System.out.println(Strings.NOT_FREE.content + "\n" + Strings.TRY_AGAIN.content);
-				return chooseName(sc);
+		System.out.println(Strings.PLEASE_INSERT_NAME.getContent());
+		try {
+			String freeName = sc.next();
+			for (int i = 0; i <= Strings.getUsedNames().length - 1; ++i) {
+				if (freeName.equals(Strings.getUsedNames()[i])) {
+					throw new NotFreeException();
+				}
 			}
-		}
-		System.out.println(Strings.SUCCESSFULLY_PICKED.content + freeName);
-		for (int i = 0; i <= Strings.usedNames.length - 1; ++i) {
-			if (freeName.equals("platzhalter0") || freeName.equals("platzhalter1")) {
-				Strings.usedNames[i] = freeName;
+			System.out.println(Strings.SUCCESSFULLY_PICKED.getContent() + freeName);
+			for (int i = 0; i <= Strings.getUsedNames().length - 1; ++i) {
+				if (freeName.equals("platzhalter0") || freeName.equals("platzhalter1")) {
+					Strings.getUsedNames()[i] = freeName;
+				}
 			}
+			return freeName;
+		} catch (NotFreeException e) {
+			System.out.println(Strings.NOT_FREE.getContent() + "\n" + Strings.TRY_AGAIN.getContent());
+			return chooseName(sc);
 		}
-		return freeName;
-
 	}
 
 	/**
@@ -254,22 +253,26 @@ public class Game {
 	 */
 	String chooseName(Scanner sc, Player player1) {
 		emptyLines(defaultEmptyLines);
-		System.out.println(Strings.PLEASE_INSERT_NAME.content);
-		String freeName = sc.next();
-		if (player1 != null) { // nicht sehr schoen geschrieben => unnoetig kompliziert
-			if (freeName.equals(player1.name) || freeName.equals("Bot")) {
-				System.out.println(Strings.NOT_FREE.content + "\n" + Strings.TRY_AGAIN.content);
-				return chooseName(sc);
+		System.out.println(Strings.PLEASE_INSERT_NAME.getContent());
+		try {
+			String freeName = sc.next();
+			if (player1 != null) { // nicht sehr schoen geschrieben => unnoetig kompliziert
+				if (freeName.equals(player1.getName()) || freeName.equals("Bot")) {
+					throw new NotFreeException();
+				}
+				// nicht sehr schoen geschrieben => unnoetig kompliziert
+			} else {
+				if (freeName.equals("Bot")) {
+					throw new NotFreeException();
+				}
 			}
-			// nicht sehr schoen geschrieben => unnoetig kompliziert
-		} else {
-			if (freeName.equals("Bot")) {
-				System.out.println(Strings.NOT_FREE.content + "\n" + Strings.TRY_AGAIN.content);
-				return chooseName(sc);
-			}
+			System.out.println(Strings.SUCCESSFULLY_PICKED.getContent() + freeName);
+			return freeName;
+		} catch (NotFreeException e) {
+			System.out.println(Strings.NOT_FREE.getContent() + "\n" + Strings.TRY_AGAIN.getContent());
+			return chooseName(sc);
+
 		}
-		System.out.println(Strings.SUCCESSFULLY_PICKED.content + freeName);
-		return freeName;
 	}
 
 	/**
@@ -281,10 +284,10 @@ public class Game {
 	 */
 	public boolean yesNoQuestion(Scanner sc, Strings question) {
 		emptyLines(defaultEmptyLines);
-		System.out.println(question.content);
+		System.out.println(question.getContent());
 		String input = sc.next().toLowerCase();
-		for (int i = 0; i <= Strings.possibleAnswersOfYes.length - 1; i++) {
-			if (input.equals(Strings.possibleAnswersOfYes[i])) {
+		for (int i = 0; i <= Strings.getPossibleAnswersOfYes().length - 1; i++) {
+			if (input.equals(Strings.getPossibleAnswersOfYes()[i])) {
 				return true;
 			}
 		}
@@ -298,14 +301,68 @@ public class Game {
 	 * @param player2
 	 */
 	void garbageCollect(Player player1, Player player2) {
-		Strings.usedNames[2] = "platzhalter0";
-		Strings.usedNames[3] = "platzhalter1";
+		Strings.getUsedNames()[2] = "platzhalter0";
+		Strings.getUsedNames()[3] = "platzhalter1";
 		// schlechte variante
-		player1.color.free = true;
-		player2.color.free = true;
-//		Strings str = new Strings("name");
-//		Strings.removeUsedName(player1.name);
-//		Strings.removeUsedName(player2.name);
+		player1.getColor().setFree(true);
+		player2.getColor().setFree(true);
+
+	}
+
+	/**
+	 * @return the defaultEmptyLines
+	 */
+	public static int getDefaultEmptyLines() {
+		return defaultEmptyLines;
+	}
+
+	/**
+	 * @param defaultEmptyLines the defaultEmptyLines to set
+	 */
+	public static void setDefaultEmptyLines(int defaultEmptyLines) {
+		Game.defaultEmptyLines = defaultEmptyLines;
+	}
+
+	/**
+	 * @return the maxAmountOfPlays
+	 */
+	public static int getMaxAmountOfPlays() {
+		return maxAmountOfPlays;
+	}
+
+	/**
+	 * @param maxAmountOfPlays the maxAmountOfPlays to set
+	 */
+	public static void setMaxAmountOfPlays(int maxAmountOfPlays) {
+		Game.maxAmountOfPlays = maxAmountOfPlays;
+	}
+
+	/**
+	 * @return the points4win
+	 */
+	public static int getPoints4win() {
+		return points4win;
+	}
+
+	/**
+	 * @param points4win the points4win to set
+	 */
+	public static void setPoints4win(int points4win) {
+		Game.points4win = points4win;
+	}
+
+	/**
+	 * @return the player
+	 */
+	public Player[] getPlayer() {
+		return player;
+	}
+
+	/**
+	 * @param player the player to set
+	 */
+	public void setPlayer(Player[] player) {
+		this.player = player;
 	}
 
 }

@@ -11,12 +11,12 @@ import java.util.Scanner;
  *
  */
 public enum Color {
-	RED(Strings.COLOR_RED_NAME.content, true, 'r'), BLUE(Strings.COLOR_BLUE_NAME.content, true, 'b'),
-	GREEN(Strings.COLOR_GREEN_NAME.content, true, 'g'), ORANGE(Strings.COLOR_ORANGE_NAME.content, true, 'o');
-	String name; // name der Farbe
-	boolean free; // true ist frei
-	char shortTerm; // Abkuerzung der Farbe
-
+	RED(Strings.COLOR_RED_NAME.getContent(), true, 'r'), BLUE(Strings.COLOR_BLUE_NAME.getContent(), true, 'b'),
+	GREEN(Strings.COLOR_GREEN_NAME.getContent(), true, 'g'), ORANGE(Strings.COLOR_ORANGE_NAME.getContent(), true, 'o');
+	private String name; // name der Farbe
+	private boolean free; // true ist frei
+	private char shortTerm; // Abkuerzung der Farbe
+	
 	/**
 	 * Konstruktor
 	 * 
@@ -76,7 +76,7 @@ public enum Color {
 	 * 
 	 * @param newFree
 	 */
-	private void setFree(boolean newFree) {
+	void setFree(boolean newFree) {
 		this.free = newFree;
 	}
 
@@ -127,35 +127,35 @@ public enum Color {
 	 * @return freie Farbe
 	 */
 	static Color chooseColor(Scanner sc) {
-		System.out.println(Strings.CHOOSE_COLOR.content);
+		System.out.println(Strings.CHOOSE_COLOR.getContent());
 		Color colorOfChoice;
 		switch (sc.next()) {
 		case "r":
-			System.out.println(Strings.YOU_PICKED.content + Strings.COLOR_RED_NAME.content);
+			System.out.println(Strings.YOU_PICKED.getContent() + Strings.COLOR_RED_NAME.getContent());
 			colorOfChoice = Color.RED;
 			break;
 		case "b":
-			System.out.println(Strings.YOU_PICKED.content + Strings.COLOR_BLUE_NAME.content);
+			System.out.println(Strings.YOU_PICKED.getContent() + Strings.COLOR_BLUE_NAME.getContent());
 			colorOfChoice = Color.BLUE;
 			break;
 		case "g":
-			System.out.println(Strings.YOU_PICKED.content + Strings.COLOR_GREEN_NAME.content);
+			System.out.println(Strings.YOU_PICKED.getContent() + Strings.COLOR_GREEN_NAME.getContent());
 			colorOfChoice = Color.GREEN;
 			break;
 		case "o":
-			System.out.println(Strings.YOU_PICKED.content + Strings.COLOR_ORANGE_NAME.content);
+			System.out.println(Strings.YOU_PICKED.getContent() + Strings.COLOR_ORANGE_NAME.getContent());
 			colorOfChoice = Color.ORANGE;
 			break;
 		default:
-			System.out.println(Strings.UNKOWN_INPUT.content + "\n" + Strings.TRY_AGAIN.content);
+			System.out.println(Strings.UNKOWN_INPUT.getContent() + "\n" + Strings.TRY_AGAIN.getContent());
 			return chooseColor(sc);
 		}
 		if (colorOfChoice.checkColorFree()) {
-			System.out.println(
-					Strings.SUCCESSFULLY_PICKED.content + colorOfChoice.name + "(" + colorOfChoice.shortTerm + ")");
+			System.out.println(Strings.SUCCESSFULLY_PICKED.getContent() + colorOfChoice.name + "("
+					+ colorOfChoice.shortTerm + ")");
 			return colorOfChoice;
 		} else {
-			System.out.println(Strings.NOT_FREE.content + "\n" + Strings.TRY_AGAIN.content);
+			System.out.println(Strings.NOT_FREE.getContent() + "\n" + Strings.TRY_AGAIN.getContent());
 			return chooseColor(sc);
 		}
 	}

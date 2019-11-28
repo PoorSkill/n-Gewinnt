@@ -7,8 +7,8 @@ package ngewinnt;
  *
  */
 public class Stone {
-	int xPos, yPos;
-	Color color;
+	private int xPos, yPos;
+	private Color color;
 
 	/**
 	 * Standart Konstruktor
