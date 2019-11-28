@@ -9,7 +9,7 @@ import ngewinnt.Strings;
  * @author Poor
  *
  */
-public class UnknownInput extends Exception {
+public class UnknownInputException extends Exception {
 
 	/**
 	 * generated Serial
@@ -19,7 +19,7 @@ public class UnknownInput extends Exception {
 	/**
 	 * Standart-Konstruktor
 	 */
-	public UnknownInput() {
+	public UnknownInputException() {
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class UnknownInput extends Exception {
 	 * 
 	 * @param message
 	 */
-	UnknownInput(String message) {
+	public UnknownInputException(String message) {
 		super(message);
 	}
 
@@ -35,6 +35,6 @@ public class UnknownInput extends Exception {
 	 * gibt Info aus (redundant)
 	 */
 	void printInfo() {
-		System.out.println(Strings.EXCEPTION_UNKNOWN_INPUT.content);
+		System.out.println(Strings.EXCEPTION_UNKNOWN_INPUT.getContent());
 	}
 }

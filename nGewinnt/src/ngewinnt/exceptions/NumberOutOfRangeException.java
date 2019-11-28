@@ -9,7 +9,7 @@ import ngewinnt.Strings;
  * @author Poor
  *
  */
-public class NumberOutOfRange extends Exception {
+public class NumberOutOfRangeException extends Exception {
 
 	/**
 	 * generated Serial
@@ -19,10 +19,10 @@ public class NumberOutOfRange extends Exception {
 	/*
 	 * Standart Konstruktor
 	 */
-	public NumberOutOfRange() {
+	public NumberOutOfRangeException() {
 	}
 
-	NumberOutOfRange(String message) {
+	public NumberOutOfRangeException(String message) {
 		super(message);
 	}
 
@@ -30,6 +30,6 @@ public class NumberOutOfRange extends Exception {
 	 * gibt Info aus (redundant)
 	 */
 	void printInfo() {
-		System.out.println(Strings.EXCEPTION_NUMBER_OUT_OF_RANGE.content);
+		System.out.println(Strings.EXCEPTION_NUMBER_OUT_OF_RANGE.getContent());
 	}
 }

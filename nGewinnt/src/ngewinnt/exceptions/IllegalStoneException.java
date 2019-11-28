@@ -7,7 +7,7 @@ package ngewinnt.exceptions;
  * @author Poor
  *
  */
-public class IllegalStone extends Exception {
+public class IllegalStoneException extends Exception {
 
 	/**
 	 * generated Serial
@@ -17,7 +17,7 @@ public class IllegalStone extends Exception {
 	/*
 	 * Standart Konstruktor
 	 */
-	public IllegalStone() {
+	public IllegalStoneException() {
 	}
 
 	/**
@@ -25,7 +25,7 @@ public class IllegalStone extends Exception {
 	 * 
 	 * @param message
 	 */
-	IllegalStone(String message) {
+	public IllegalStoneException(String message) {
 		super(message);
 	}
 }

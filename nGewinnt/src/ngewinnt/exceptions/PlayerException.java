@@ -14,11 +14,11 @@ public class PlayerException extends Exception {
 	 */
 	private static final long serialVersionUID = -4880646768944844306L;
 
-	PlayerException() {
+	public PlayerException() {
 
 	}
 
-	PlayerException(String message) {
+	public PlayerException(String message) {
 		super(message);
 	}
 

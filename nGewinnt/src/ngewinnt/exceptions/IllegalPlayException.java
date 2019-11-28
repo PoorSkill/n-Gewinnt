@@ -7,7 +7,7 @@ package ngewinnt.exceptions;
  * @author Poor
  *
  */
-public class IllegalPlay extends Exception {
+public class IllegalPlayException extends Exception {
 
 	/**
 	 * generated Serial
@@ -17,7 +17,7 @@ public class IllegalPlay extends Exception {
 	/**
 	 * Standart Konstruktor
 	 */
-	IllegalPlay() {
+	public IllegalPlayException() {
 	}
 
 	/**
@@ -25,7 +25,7 @@ public class IllegalPlay extends Exception {
 	 * 
 	 * @param message
 	 */
-	IllegalPlay(String message) {
+	public IllegalPlayException(String message) {
 		super(message);
 	}
 }
