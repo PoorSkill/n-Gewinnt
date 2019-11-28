@@ -53,7 +53,7 @@ public class Player {
 	}
 
 	/**
-	 * setter von opponent (nicht geschuetzt!!)
+	 * setter von opponent 
 	 * 
 	 * @param opponentPlayer
 	 */
