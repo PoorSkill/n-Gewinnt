@@ -95,6 +95,8 @@ public class Gamefield {
 					if (pointsCount >= Game.getPoints4win()) {
 						System.out.println(player.getName() + Strings.PLAYER_GOT_POINTS.getContent() + pointsCount);
 						player.setWon(true);
+						// TODO: Ueberprueft ausgehend vom letzten gesetzten Stein -> Anzeige nicht
+						// korrekt
 						char posCharXPos0 = (char) ('A' - 1 + (i - Gamefield.fieldMax) * (-1));
 						System.out.println(posCharXPos0 + "-" + (Gamefield.fieldMax - i) + " bis " + posCharXPos0 + "-"
 								+ (Gamefield.fieldMax - i + Game.getPoints4win() - 1));
@@ -117,8 +119,10 @@ public class Gamefield {
 					if (pointsCount >= Game.getPoints4win()) {
 						System.out.println(player.getName() + Strings.PLAYER_GOT_POINTS.getContent() + pointsCount);
 						player.setWon(true);
-						char posCharXPos0 = (char) ('A' - 1 + (j) - 2);
-						char posCharXPos1 = (char) ('A' - 1 + ((j + Game.getPoints4win())) - 2);
+						// TODO: Ueberprueft ausgehend vom letzten gesetzten Stein -> Anzeige nicht
+						// korrekt
+						char posCharXPos0 = (char) ('A' - 1 + ((j - 1)));
+						char posCharXPos1 = (char) ('A' - 1 + ((j + Game.getPoints4win() + 1)));
 						System.out.println(posCharXPos0 + "-" + (yPos - Gamefield.fieldMax) * (-1) + " bis "
 								+ posCharXPos1 + "-" + (yPos - Gamefield.fieldMax) * (-1));
 						return true;
